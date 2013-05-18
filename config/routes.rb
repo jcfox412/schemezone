@@ -19,6 +19,8 @@ Screamzone::Application.routes.draw do
 
   match 'add-scheme' => 'users#add_scheme'
 
+  match "/events/:event_id/contests/add_scheme" => "contests#add_scheme"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
