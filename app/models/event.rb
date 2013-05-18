@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
   # database based off the stubhub_eventId
   # < Marco Salazar, salazarm@mit.edu >
   def self.find_or_create_event(params)
-  	event = Event.find_by_stubhub_eventId(params[:stubhub_eventId])
+  	event = Event.find_by_stubhub_eventId(params[:event][:stubhub_eventId])
   	unless event
   		event = Event.create(params[:event])
   	end
