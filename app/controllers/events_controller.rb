@@ -13,8 +13,12 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find_by_stubhub_eventId(params[:id])
+    @event = Event.find_by_stubhub_eventId(:stubhub_eventId => params[:id])
 
+    @schemes = @event.schemes.where(:team_name => params[:team_name])
+
+    @team = params[:team]
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
