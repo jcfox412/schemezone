@@ -40,6 +40,21 @@ class ContestsController < ApplicationController
     end
   end
 
+  def add_scheme
+    @scheme = Scheme.find(params[:scheme_id])
+
+    @contest = Contest.find(params[:contest_id])
+    @contest.schemes << @scheme
+
+    if @contest.save
+        format.html { redirect_to root_url }
+        format.json { render json: @contest }
+    else
+      format.html { render action: "new" }
+      format.json { render json: @contest.errors, status: :unprocessable_entity }
+    end
+  end
+
   protected
   def get_event
     @event =  Event.find_by_stubhub_eventId(params[:event_id])
