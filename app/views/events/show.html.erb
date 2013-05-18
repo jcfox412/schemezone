@@ -121,7 +121,17 @@ $(document).ready(function(){
 <div id="show-wrapper" class="container">
   <div id="title-2">
     <h2><%= @event.name %></h2>
-    <%= link_to 'Edit', edit_event_path(@event) %>  
+  </div>
+  <div id="event-show-info">
+    <div class="pull-left">
+      Schemes: <%= @event.schemes.count %> 
+    </div>
+    <div class="pull-left">
+      Schemers: <%= @event.schemers %>
+    </div>
+    <div class="pull-left">
+      <%= link_to 'Edit', edit_event_path(@event) %>  
+    </div>
   </div>
   <div>
     <div class="row clearfix">

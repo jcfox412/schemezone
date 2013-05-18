@@ -14,4 +14,17 @@ class Event < ActiveRecord::Base
   	end
   end
 
+  def schemers
+    sum = 0
+    schemesHash = Hash.new
+    schemes.each do |scheme|
+      scheme.users.each do |user|
+        unless schemesHash.has_key?(user)
+          schemesHash[user] = 1
+          sum+= 1
+        end
+      end
+    end
+    return sum
+  end
 end
