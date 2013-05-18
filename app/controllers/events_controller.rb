@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by_stubhub_eventId(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     Event.find_or_create_event(params)
-    
+
     @event = Event.new(params[:event])
 
     # respond_to do |format|
