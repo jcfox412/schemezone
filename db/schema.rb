@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518004133) do
+ActiveRecord::Schema.define(:version => 20130518011444) do
 
   create_table "events", :force => true do |t|
     t.string   "stubhub_eventId"
@@ -25,8 +25,9 @@ ActiveRecord::Schema.define(:version => 20130518004133) do
     t.string   "string"
     t.text     "description"
     t.string   "title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "stubhub_eventId"
   end
 
   create_table "users", :force => true do |t|
