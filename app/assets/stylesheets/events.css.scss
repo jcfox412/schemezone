@@ -3,10 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.scheme {
-	width: 700px;
-}
-
 .form {
 	margin: 0 auto;
 	width: 300px;
@@ -178,6 +174,10 @@ footer {
 	}
 }
 
+html {
+	min-width: 1200px;
+}
+
 #team1, #team2 {
 	text-align: center;
 	margin: 0 auto;
@@ -187,21 +187,106 @@ footer {
 	line-height: 66px; 
 	vertical-align:middle;
 }
+	
+#schemes {
+	margin: 0px;
+	padding: 0px;
+	height: 400px;
+	overflow: scroll;
+}
+
+#map2 {
+	background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); 
+	background-size: 400px 400px; 
+	width: 400px; 
+	height: 400px; 
+	padding-left: 10px;	
+	margin-left: 20px;
+}
 
 
 #events-container {
 	display:none;
 	width: 100%;
 	text-align: center;
-	.event {
-		width: 520px;
-		margin: 0 auto;
-		padding: 10px;
-		cursor: pointer;
-		border-radius: 5px;
-		&:hover {
-			background-color: #005076;
-			color: #fff;
+}
+
+.event, .scheme {
+	width: 520px;
+	margin: 0 auto;
+	padding: 3px;
+	cursor: pointer;
+	border-radius: 5px;
+	&:hover {
+		background-color: #005076;
+		color: #fff;
+	}
+}
+
+.scheme img {
+	padding: 3px;
+	border: 1px solid #000;
+	width: 66px;
+	height: 66px;
+	background-color: #fff;
+	margin-right: 10px;
+}
+.scheme {
+	margin: 0;
+	height: 74px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: -webkit-match-parent;
+	line-height: 18px;
+	margin-bottom: 5px;
+	border-radius: 0px;
+	h3 {
+		margin: 0px;
+		padding: 0px;
+		line-height: 20px;
+		font-size: 20px;
+	}
+	.text {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 31	0px;
+		margin-left: 80px;
+		margin-top: -70px;
+		p {
+			padding-left: 2px;
 		}
 	}
 }
+
+#title {
+	-webkit-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
+	box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
+	border-top: 1px solid #d0d0d0;
+	background-color: #e5e5e5;
+	background-image: -webkit-linear-gradient(top, #f6f6f6 0%,#e5e5e5 100%);
+	background-image: -moz-linear-gradient(top, #f6f6f6 0%,#e5e5e5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff6f6f6', endColorstr='#ffe5e5e5', GradientType=0);
+	border-bottom: 1px solid #d0d0d0;
+	-webkit-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
+	box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
+	border-top: 1px solid #d0d0d0;
+	font-size: 13px;
+	line-height: 18px;
+	color: #393c3d;
+	text-align: center;
+}
+
+#show-wrapper {
+	overflow: hidden;
+	margin: 0px auto;
+	border: 1px solid #c8c8c8;
+	border-color: rgba(0,0,0,0.2);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}

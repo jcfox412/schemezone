@@ -6,8 +6,7 @@ $(document).ready(function(){
     $("#pin").hide()
     $('#map').mousemove(function(e){
         if (!picked){
-             var parentOffset = $(this).parent().offset(); 
-               //or $(this).offset(); if you really just want the current element's offset
+             var parentOffset = $(this).parent().offset();
                posX = e.pageX - parentOffset.left - 24;
                posY = e.pageY - parentOffset.top - 40;
              $("#pin").show()
@@ -16,22 +15,16 @@ $(document).ready(function(){
              console.log(posX + " " + posY)
         }
     });
-
     $('#map').dblclick(function(){
         picked = false
-        $('#temp-loc').html("")
+        $('#temp-loc').html("");
     })
-
     $('#map').click(function(){
         $('#temp-loc').html("Your location is saved!")
         picked = true
     });
-
     window.schemes =  <%= raw @schemes.to_json %>
     window.locs = <%= raw @locs.to_json %>
-
-  
-
     $('.schemes').hover(function(){
          $('#map2').html("");
         id = $(this).attr('data-id')
@@ -49,16 +42,10 @@ $(document).ready(function(){
                 break;
             }
         }
-
-
     });
-
-
-
     <% if !@current_user %>
         $('#create-scheme-btn').hide()
     <% end%>
-
     <% if @current_user %>
     $('#scheme-form-submit').click(function(){
          $.ajax({
@@ -77,50 +64,35 @@ $(document).ready(function(){
                     //image_url,
                     team_name: "<%= @team %>",
                 }
-
             },
             dataType: "json",
             success: function(data){
                 location.reload()
             }
         });
-
         return false;
-
     })  
     <% end%>
-
 });
-
 </script>
 
 <p id="notice"><%= notice %></p>
 
 
-<a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Create New Scheme!</a>
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     Create Scheme!
   </div>
-  <div class="modal-body">
-   
 
-  
+  <div class="modal-body">  
     <% if !@already_have_loc %>
-
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
-
         <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
             <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
-
     <% end%>
-
-
-
-    <form class="form-horizontal" >
-      
+    <form class="form-horizontal" >     
       <div class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">
@@ -140,37 +112,37 @@ $(document).ready(function(){
           <button type="submit" id="scheme-form-submit" class="btn">Create!</button>
         </div>
       </div>
-
-
     </form>
-
-
-
   </div>
-
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
-
-<p>
-  <b>Stubhub eventid:</b>
-  <%= @event.stubhub_eventId %>
-</p>
-
-    <div id="map2" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
-       
+<div id="show-wrapper" class="container">
+  <div id="title">
+    <h2><%= @event.name %></h2>
+    <%= link_to 'Edit', edit_event_path(@event) %>  
+  </div>
+  <div>
+    <div class="row clearfix">
+      <div id="map2" class="pull-left">
+      </div>
+      <div id="schemes" class="pull-left">
+        <% @schemes.each do |s| %>
+            <div class ="scheme clearfix" data-id="<%= s.id %>">
+              <div class="pull-left">
+                <img src="<%= s.image_url%>" width="66" height="66"/>
+              </div>
+              <div class="pull-left text">
+                <h3><%= s.title %> aifjoiasjfojaosjfoijoasfn aoisnfoiasnfonaosf sa foasnfnasiofnoa sfoasnfoasnoifna dsfsfsdfsdsdf</h3>
+                <p><%= s.description %></p>
+              </div>
+            </div>
+        <% end %>
+        <div style="display: inline-block; margin: 0 auto;">
+          <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Create New Scheme!</a>
+        </div>
+      </div>
     </div>
-
-
-<% @schemes.each do |s| %>
-    <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
-      <h3><%= s.title %></h3>
-      <p><%= s.description %></p>
-      
-    </div>
-<% end %>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+  </div>
+</div>
