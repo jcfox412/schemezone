@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @event = Event.find_by_stubhub_eventId(:stubhub_eventId => params[:id])
+    @event = Event.find_by_stubhub_eventId(params[:id])
 
     @schemes = @event.schemes.where(:team_name => params[:team_name])
 
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
   #     format.html # new.html.erb
   #     format.json { render json: @event }
   #   end
-  # end
+  # stubhub_eventId
 
   # # GET /events/1/edit
   # def edit
@@ -45,18 +45,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     Event.find_or_create_event(params)
-
-    @event = Event.new(params[:event])
-
-    # respond_to do |format|
-    #   if @event.save
-    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #     format.json { render json: @event, status: :created, location: @event }
-    #   else
-    #     format.html { render action: "new" }
-    #     format.json { render json: @event.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    render :nothing => true
   end
 
   # # PUT /events/1

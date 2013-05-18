@@ -1,6 +1,7 @@
 ;$(document).ready(function(){
 
 	var search_template = _.template($("#search-results-template").html());
+	var team_select_template = _.template($("#modal-popup").html());
 
   function changeDomOnSearch(events){
 		$("#schema-container").remove();
@@ -27,6 +28,7 @@
 							}
 						},
 				});
+				$("#team-select").html(team_select_template(event)).show();
 			});
 			$("#events").append(ev);
 		});

@@ -42,11 +42,24 @@
       </div>
     <% end %> 
     <!-- end if current_user div -->
-
+  </div>
+  <div class="overlay" id="team-select">
   </div>
 
-<script type="text/template" id="search-results-template">
+<script type="text/template"  id="search-results-template">
   <h4> [[= count ]] Results</h4>
   <div id="events">
   </div>
 </script>
+
+<script type="text/template" id="modal-popup">
+  <div class="box">
+    <a href="/events/[[= id ]]?team=[[= performers[0].name  ]]"><div id="team1">[[= performers[0].name ]]</div></a>
+    <a href="/events/[[= id ]]?team=[[= performers[1].name  ]]"><div id="team2">[[= performers[1].name ]]</div></a>
+  </div>
+</script>
+
+
+
+
+
