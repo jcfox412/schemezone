@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_and_belongs_to_many :schemes
+  has_many :messages
+
   before_validation :downcase_email
 
   validates_confirmation_of :email
