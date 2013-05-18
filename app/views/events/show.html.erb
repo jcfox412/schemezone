@@ -42,6 +42,8 @@ $(document).ready(function(){
                 break;
             }
         }
+    }).mouseleave(function(){
+         $('#map2').html("");
     });
     <% if !@current_user %>
         $('#create-scheme-btn').hide()
