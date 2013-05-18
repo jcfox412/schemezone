@@ -8,5 +8,13 @@ class ApplicationController < ActionController::Base
 		puts @current_user	
 	end
 	helper_method :current_user
+
+	private
+  	#makes sure that the user is logged in, else redirects to login page
+  	def require_login
+      unless @current_user
+      	redirect_to root_url, :notice => "You must be logged in to access this section"
+      end
+    end
 	
 end
