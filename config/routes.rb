@@ -1,12 +1,14 @@
 Screamzone::Application.routes.draw do
 
- 
   resources :events do
-     resources :schemes do
-       resources :messages
-     end
+    resources :schemes do
+      resources :messages
+    end
+    resources :contests
   end
-  resources :users
+  resources :users do
+    resources :team_admins
+  end
   resources :sessions
 
   root :to => 'events#index'
