@@ -1,7 +1,11 @@
 Screamzone::Application.routes.draw do
+  resources :messages
+
+
   resources :schemes
   resources :events
   resources :users
+  resources :sessions
 
   root :to => 'events#index'
 
