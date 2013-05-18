@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518053005) do
+ActiveRecord::Schema.define(:version => 20130518060448) do
 
   create_table "events", :force => true do |t|
     t.string   "stubhub_eventId"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130518053005) do
     t.string   "image_url"
     t.string   "team_1"
     t.string   "team_2"
+    t.string   "date"
   end
 
   create_table "schemes", :force => true do |t|

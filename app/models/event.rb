@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :stubhub_eventId, :name, :description, :image_url
+  attr_accessible :stubhub_eventId, :name, :description, :image_url, :team_1, :team_2, :date
   has_many :schemes
 
   # Used by the controller to find or create and event in our
@@ -13,3 +13,4 @@ class Event < ActiveRecord::Base
   end
 
 end
+rail
