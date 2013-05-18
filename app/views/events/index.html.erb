@@ -85,7 +85,7 @@
       $("#events-container").html("");
       $("#events-container").append(
         search_template({ count: matches.length })
-      ).fadeIn(2000).slideDown(500);
+      ).hide().fadeIn(2000).slideDown(500);
       $('html, body').animate({
           scrollTop: $("#events-container").offset().top
       }, 300);
