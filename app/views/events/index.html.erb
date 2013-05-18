@@ -13,12 +13,14 @@
     </div>
     <div id="your-upcomming-schemes" class="span3 offset1">
       <ul id="user-schemes">
-        <% @current_user && @currenter.schemes %>
-          <li class="scheme">
-            <div class="scheme-photo">
+        <% if @current_user %>
+          <% @current_user.schemes do |scheme| %>
+            <li class="scheme">
+              <div class="scheme-photo">
 
-            </div>
-          </li>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </div>
     </div>
