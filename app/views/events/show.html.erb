@@ -8,8 +8,8 @@ $(document).ready(function(){
         if (!picked){
              var parentOffset = $(this).parent().offset(); 
                //or $(this).offset(); if you really just want the current element's offset
-               posX = e.pageX - parentOffset.left - 6;
-               posY = e.pageY - parentOffset.top - 10;
+               posX = e.pageX - parentOffset.left - 24;
+               posY = e.pageY - parentOffset.top - 40;
              $("#pin").show()
              $("#pin").css("left", posX + "px")
              $("#pin").css("top", posY + "px")
@@ -27,8 +27,31 @@ $(document).ready(function(){
         picked = true
     });
 
-    $('#schemes').hover(function(){
-        
+    window.schemes =  <%= raw @schemes.to_json %>
+    window.locs = <%= raw @locs.to_json %>
+
+  
+
+    $('.schemes').hover(function(){
+         $('#map2').html("");
+        id = $(this).attr('data-id')
+        for (var i = 0; i < schemes.length; i++){
+            if (schemes[i].id == id){
+                users = schemes[i].users
+                for (var j = 0; j < users.length; j++){
+                    var u_id = users[j].id
+                    for (var k = 0; k < locs.length; k++){
+                        if (locs[i].user_id = u_id){
+                            $('#map2').append('<image src="/assets/img/map.png" style="width:12px; height:20px; position:absolute; left:' + locs[i].left + 'px; top: ' + locs[i].top +'px"/>')
+                        }
+                    }
+                    
+                }
+                break;
+            }
+        }
+
+
     });
 
 
@@ -59,7 +82,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data){
-                
+                location.reload()
             }
         });
 
@@ -81,12 +104,14 @@ $(document).ready(function(){
     Create Scheme!
   </div>
   <div class="modal-body">
-    Pick your location below by clicking on the map. Double click to change:
-    <div "temp-loc" > </div>
+   
 
   
     <% if !@already_have_loc %>
-    
+
+         Pick your location below by clicking on the map. Double click to change:
+        <div "temp-loc" > </div>
+
         <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
             <image id="pin" src="/assets/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
@@ -113,7 +138,7 @@ $(document).ready(function(){
 
       <div class="control-group">
         <div class="controls">
-          <button type="submit" id="scheme-form-submit" class="btn">Sign in</button>
+          <button type="submit" id="scheme-form-submit" class="btn">Create!</button>
         </div>
       </div>
 
@@ -126,7 +151,6 @@ $(document).ready(function(){
 
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
   </div>
 </div>
 
@@ -141,7 +165,7 @@ $(document).ready(function(){
 
 
 <% @schemes.each do |s| %>
-    <div style="width:300px; height:100px; background:grey" class ="schemes">
+    <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
       <h3><%= s.title %></h3>
       <p><%= s.description %></p>
       
