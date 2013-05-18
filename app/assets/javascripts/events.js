@@ -23,7 +23,7 @@
 								name : event.name,
 								image_url: event.images[0].url,
 								team_1: event.performers[0].name,
-								teams_2: event.performers[1].name
+								team_2: event.performers[1].name
 							}
 						},
 				});
