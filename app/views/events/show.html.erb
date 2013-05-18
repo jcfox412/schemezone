@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    Create Scheme!
+    Start a Scheme!
   </div>
 
   <div class="modal-body">  
@@ -123,18 +123,12 @@ $(document).ready(function(){
     <h2><%= @event.name %></h2>
   </div>
   <div id="event-show-info">
-    <div class="pull-left">
-      <strong>Schemes:</strong><span class="text-number-special"><%= @event.schemes.count %></span>
-    </div>
-    <div class="pull-left">
-      <strong>Schemers:</strong> <span class="text-number-special"><%= @event.schemers %></span>
-    </div>
-    <div class="pull-left">
-      <%= link_to 'Edit', edit_event_path(@event) %>  
-    </div>
+      Schemes:<span class="text-number-special"><%= @event.schemes.count %></span>
+      Schemers:<span class="text-number-special"><%= @event.schemers %></span>
+      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Start a Scheme!</a>
   </div>
   <div>
-    <div class="row clearfix">
+    <div class="row clearfix" style="margin-right: -5px;">
       <div id="map2" class="pull-left">
       </div>
       <div id="schemes" class="pull-left">
@@ -151,9 +145,6 @@ $(document).ready(function(){
               </div>
             </a>
         <% end %>
-        <div style="display: inline-block; margin: 0 auto;">
-          <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Create New Scheme!</a>
-        </div>
       </div>
     </div>
   </div>
