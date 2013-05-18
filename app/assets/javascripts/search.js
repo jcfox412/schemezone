@@ -8,26 +8,28 @@
             data: { 
                 key: "TEKACENXPPGFKKYYCOIKWIUALTPNABMORQSXJBWOMNNEVDLQAFNUMJTQRIJWBCRX", 
                 where: loc,
-                what: name
+                what: name,
+                "format" : "json",
             },
-            dataType: "xml",
-            success: function(xml){
-                var events = []
-                $(xml).find('event').each(function(){
-                   var id = $(this).attr('id')
-                   var name = $(this).find('name').text();
+            dataType: "json",
+            success: function(data){
+                // var events = []
+                // $(xml).find('event').each(function(){
+                //    var id = $(this).attr('id')
+                //    var name = $(this).find('name').text();
 
-                   var images = []
+                //    var images = []
 
-                   $(this).find('images').each(function(){
-                    images.push($(this).find("url").text())
-                   });
+                //    $(this).find('images').each(function(){
+                //     images.push($(this).find("url").text())
+                //    });
 
-                   events.push({"id": id, "name" : name, "images":images})
+                //    events.push({"id": id, "name" : name, "images":images})
 
-                });
-                console.log(events)
-                callback(events)
+                // });
+                obj = data.rsp.content.events
+                console.log(obj)
+                // callback(events)
             }
         });
 
