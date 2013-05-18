@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Schemezone</title>
+  <title>Scheme Zone</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
   <%= javascript_include_tag "jquery", "jquery_ujs" %>
@@ -9,22 +9,27 @@
 </head>
 <body>
 
-<div class="container" style="margin-top: 10px;">
-	<div class="pull-right clearfix">
-		<% if !@current_user %>
-		    <%= form_tag sessions_path, :style =>"display: inline;" do |f| %>  
-		        <%= text_field_tag :email, params[:email], :placeholder => "Email" %> 
-		        <%= password_field_tag :password, params[:password], :placeholder => "Password" %>
-		        <%= submit_tag "Log in", :class=>"btn btn-primary", :style=>"margin-top: -10px" %>  
-		    <% end %>  
-		    <a class="btn btn-primary" style="margin-top: -10px;" href=<%= new_user_path %>>Signup</a>
-	    <% else %>
-			<a  class="btn btn-primary" href="/logout">Logout</a>
-		<% 	end %> 
+<div style="padding-top: 10px; background-color: #222;">
+	<div class="container" id="navbar">
+		<div class="pull-right clearfix">
+			<% if !@current_user %>
+			    <%= form_tag sessions_path, :style =>"display: inline;" do |f| %>  
+			        <%= text_field_tag :email, params[:email], :placeholder => "Email", :class=>"field" %> 
+			        <%= password_field_tag :password, params[:password], :placeholder => "Password", :class=>"field" %>
+			        <%= submit_tag "Log in", :class=>"btn field", :style=>"margin-top: -10px; padding: 5px" %>  
+			    <% end %>  
+			    <a class="btn field" style="margin-top: -10px; padding: 5px" href=<%= new_user_path %>>Signup</a>
+		    <% else %>
+				<div style="margin-bottom: 10px;"><a  class="btn field" style="padding: 5px" href="/logout">Logout</a></div>
+			<% 	end %> 
+		</div>
 	</div>
-</div>
+</div>	
 
 <%= yield %>
 
+<footer>
+	&copy; Scheme Zone 2013
+</footer>
 </body>
 </html>
