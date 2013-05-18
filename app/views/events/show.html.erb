@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
     window.schemes =  <%= raw @schemes.to_json %>
     window.locs = <%= raw @locs.to_json %>
-    $('.schemes').hover(function(){
+    $('.scheme').hover(function(){
          $('#map2').html("");
         id = $(this).attr('data-id')
         for (var i = 0; i < schemes.length; i++){
@@ -35,7 +35,7 @@ $(document).ready(function(){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
                         if (locs[k].user_id == u_id){
-                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + locs[k].left + 'px; top: ' + locs[k].top +'px"/>')
+                            $('#map2').append('<image class="ping" src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
                         }
                     }
                 }
@@ -60,7 +60,7 @@ $(document).ready(function(){
                     event_id: <%= @event.id %>,
                     creator_id: <%= @current_user.id %>,
                     description: $('#description').val(),
-                    title: $('#title').val(),
+                    title: $('#title3').val(),
                     //image_url,
                     team_name: "<%= @team %>",
                 }
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    Create Scheme!
+    Start a Scheme!
   </div>
 
   <div class="modal-body">  
@@ -96,7 +96,7 @@ $(document).ready(function(){
       <div class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">
-          <input type="text" id="title" placeholder="Title">
+          <input type="text" id="title3" placeholder="Title">
         </div>
       </div>
 
@@ -121,10 +121,14 @@ $(document).ready(function(){
 <div id="show-wrapper" class="container">
   <div id="title-2">
     <h2><%= @event.name %></h2>
-    <%= link_to 'Edit', edit_event_path(@event) %>  
+  </div>
+  <div id="event-show-info">
+      Schemes:<span class="text-number-special"><%= @event.schemes.count %></span>
+      Schemers:<span class="text-number-special"><%= @event.schemers %></span>
+      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Start a Scheme!</a>
   </div>
   <div>
-    <div class="row clearfix">
+    <div class="row clearfix" style="margin-right: -5px;">
       <div id="map2" class="pull-left">
       </div>
       <div id="schemes" class="pull-left">
@@ -135,15 +139,12 @@ $(document).ready(function(){
                   <img src="<%= s.image_url%>" width="66" height="66"/>
                 </div>
                 <div class="pull-left text">
-                  <h3><%= s.title %> aifjoiasjfojaosjfoijoasfn aoisnfoiasnfonaosf sa foasnfnasiofnoa sfoasnfoasnoifna dsfsfsdfsdsdf</h3>
+                  <h3><%= s.title %>    </h3>
                   <p><%= s.description %></p>
                 </div>
               </div>
             </a>
         <% end %>
-        <div style="display: inline-block; margin: 0 auto;">
-          <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Create New Scheme!</a>
-        </div>
       </div>
     </div>
   </div>

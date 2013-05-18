@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @message.user_id = @current_user.id
 
     if @message.save
-      respond_with(@message, :status => :created)
+      respond_with([@scheme.event,@scheme,@message], :status => :created)
     else
       respond_with(@message.errors, :status => :unprocessable_entity)
     end
