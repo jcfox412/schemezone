@@ -8,7 +8,7 @@ class Scheme < ActiveRecord::Base
 
   # override method so messages are included in json
   def as_json(options={})
-      super(:include =>[:messages])
+      super(:include =>[:messages,:users])
   end
   
 end
