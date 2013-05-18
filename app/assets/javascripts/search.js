@@ -1,5 +1,4 @@
 
-$(document).ready(function(){
 
     $(document).ajaxSend(function(e, xhr, options) {
       var token = $("meta[name='csrf-token']").attr("content");
@@ -19,7 +18,8 @@ $(document).ready(function(){
                 console.log(data)
             }
         });
-    }
-});
+ 
 
+
+    }
 
