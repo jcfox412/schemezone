@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @scheme.users << @current_user
 
       respond_to do |format|
-        format.json { render json: @raEven }
+        format.json { render json: @scheme }
       end
     end
   end
