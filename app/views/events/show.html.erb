@@ -124,10 +124,10 @@ $(document).ready(function(){
   </div>
   <div id="event-show-info">
     <div class="pull-left">
-      Schemes: <%= @event.schemes.count %> 
+      <strong>Schemes:</strong><span class="text-number-special"><%= @event.schemes.count %></span>
     </div>
     <div class="pull-left">
-      Schemers: <%= @event.schemers %>
+      <strong>Schemers:</strong> <span class="text-number-special"><%= @event.schemers %></span>
     </div>
     <div class="pull-left">
       <%= link_to 'Edit', edit_event_path(@event) %>  
@@ -145,7 +145,7 @@ $(document).ready(function(){
                   <img src="<%= s.image_url%>" width="66" height="66"/>
                 </div>
                 <div class="pull-left text">
-                  <h3><%= s.title %></h3>
+                  <h3><%= s.title %>    </h3>
                   <p><%= s.description %></p>
                 </div>
               </div>
