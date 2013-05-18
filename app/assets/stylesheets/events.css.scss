@@ -115,3 +115,13 @@
 	margin: 5px;
 }
 
+#events-container {
+	display:none;
+	.event {
+		cursor: pointer;
+		&:hover {
+			background-color: #000;
+			color: #fff;
+	}
+	}
+}
