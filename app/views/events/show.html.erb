@@ -60,7 +60,7 @@ $(document).ready(function(){
                     event_id: <%= @event.id %>,
                     creator_id: <%= @current_user.id %>,
                     description: $('#description').val(),
-                    title: $('#title').val(),
+                    title: $('#title3').val(),
                     //image_url,
                     team_name: "<%= @team %>",
                 }
@@ -96,7 +96,7 @@ $(document).ready(function(){
       <div class="control-group">
         <label class="control-label" for="title">Title</label>
         <div class="controls">
-          <input type="text" id="title" placeholder="Title">
+          <input type="text" id="title3" placeholder="Title">
         </div>
       </div>
 
@@ -145,7 +145,7 @@ $(document).ready(function(){
                   <img src="<%= s.image_url%>" width="66" height="66"/>
                 </div>
                 <div class="pull-left text">
-                  <h3><%= s.title %> aifjoiasjfojaosjfoijoasfn aoisnfoiasnfonaosf sa foasnfnasiofnoa sfoasnfoasnoifna dsfsfsdfsdsdf</h3>
+                  <h3><%= s.title %></h3>
                   <p><%= s.description %></p>
                 </div>
               </div>
