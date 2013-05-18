@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
     window.schemes =  <%= raw @schemes.to_json %>
     window.locs = <%= raw @locs.to_json %>
-    $('.schemes').hover(function(){
+    $('.scheme').hover(function(){
          $('#map2').html("");
         id = $(this).attr('data-id')
         for (var i = 0; i < schemes.length; i++){
@@ -35,7 +35,8 @@ $(document).ready(function(){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
                         if (locs[k].user_id == u_id){
-                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + locs[k].left + 'px; top: ' + locs[k].top +'px"/>')
+                            console.log(locs[k])
+                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
                         }
                     }
                 }
@@ -135,7 +136,9 @@ $(document).ready(function(){
   </div>
   <div>
     <div class="row clearfix">
-      <div id="map2" class="pull-left">
+      <div id="map2" class="pull-left" >
+
+
       </div>
       <div id="schemes" class="pull-left">
         <% @schemes.each do |s| %>
