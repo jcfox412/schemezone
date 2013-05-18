@@ -9,7 +9,8 @@
                 key: "TEKACENXPPGFKKYYCOIKWIUALTPNABMORQSXJBWOMNNEVDLQAFNUMJTQRIJWBCRX", 
                 where: loc,
                 what: name,
-                "format" : "json",
+                format : "json",
+                cat: "9"
             },
             dataType: "json",
             success: function(data){
@@ -29,7 +30,7 @@
                 // });
                 obj = data.rsp.content.events
                 console.log(obj)
-                // callback(events)
+                //callback(obj);
             }
         });
 
