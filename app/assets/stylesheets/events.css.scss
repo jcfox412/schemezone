@@ -94,16 +94,16 @@ footer {
 
 #submit
 {		
-	background: #6cbb6b;
-	background-image: -moz-linear-gradient(#95d788, #6cbb6b);
-	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #6cbb6b),color-stop(1, #95d788));
+	background: #006bbb;
+	background-image: -moz-linear-gradient(#0088d7, #006bbb);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #006bbb),color-stop(1, #0088d7));
 	
 	-moz-border-radius: 3px 50px 50px 3px;
 	border-radius: 3px 50px 50px 3px;
 	
 	border-width: 1px;
 	border-style: solid;
-	border-color: #7eba7c #578e57 #447d43;
+	border-color: #007cba #00578e #00437d;
 	
 	 -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
 	 -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
@@ -122,14 +122,14 @@ footer {
 
 #submit:hover
 {		
-	background: #95d788;
-	background-image: -moz-linear-gradient(#6cbb6b, #95d788);
-	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #95d788),color-stop(1, #6cbb6b));
+	background: #0088d7;
+	background-image: -moz-linear-gradient(#006bbb, #0088d7);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #0088d7),color-stop(1, #006bbb));
 }	
 
 #submit:active
 {		
-	background: #95d788;
+	background: #0088d7;
 	outline: none;
    
 	 -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
@@ -192,8 +192,9 @@ footer {
 	.event {
 		padding: 10px;
 		cursor: pointer;
+		border-radius: 5px;
 		&:hover {
-			background-color: #000;
+			background-color: #005076;
 			color: #fff;
 		}
 	}
