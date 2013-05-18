@@ -26,5 +26,15 @@
 </p>
 
 
-<%= link_to 'Edit', edit_scheme_path(@scheme) %> |
-<%= link_to 'Back', schemes_path %>
+<% @scheme.users.each do |u| %>
+    <div style="width:300px; height:100px; background:grey" class ="user">
+      <h3><%= u.name %></h3>
+    </div>
+   
+<% end %>
+
+
+<!-- 
+<%= link_to 'Edit', edit_event_scheme_path(@event,@scheme) %> 
+ -->
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518170933) do
+ActiveRecord::Schema.define(:version => 20130518185042) do
 
   create_table "contests", :force => true do |t|
     t.string   "image_url"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(:version => 20130518170933) do
     t.string   "title"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "prize_description"
   end
 
   create_table "events", :force => true do |t|
@@ -59,6 +60,11 @@ ActiveRecord::Schema.define(:version => 20130518170933) do
     t.string   "endorsed_by"
   end
 
+  create_table "schemes_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "scheme_id"
+  end
+
   create_table "team_admins", :force => true do |t|
     t.string   "team_name"
     t.integer  "user_id"
@@ -75,13 +81,6 @@ ActiveRecord::Schema.define(:version => 20130518170933) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "user_scheme_watchlists", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "scheme_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "stubhub_userId"
     t.string   "seat"
@@ -89,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20130518170933) do
     t.datetime "updated_at",      :null => false
     t.string   "email"
     t.string   "password_digest"
+    t.string   "name"
   end
 
 end
