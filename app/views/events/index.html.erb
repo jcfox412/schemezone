@@ -91,7 +91,8 @@
       <img src="[[= images[0].url ]]"></img>
     </div>
     <div class="pull-left" style="padding: 0 10px;">
-      [[= name ]]
+      <div>[[= name ]]</div>
+      <div>[[= pretty_date(starttime) ]]</div>
     </div>
   </div>
 </script>
@@ -111,7 +112,7 @@
       $("#schema-container").remove();
       var matches = _.filter(events, function(event){
                       return event.performers.length == 2;
-                    });
+                  });
       $("#scheme-container").remove();
       $("#events-container").html("").show();
       $("#events-container").append(
@@ -120,7 +121,9 @@
       $('html, body').animate({
           scrollTop: $("#events-container").offset().top
       }, 300);
-      _.each(matches, function(event){
+      _.each(matches.sort(function(a,b){
+         return (new Date(a.starttime)).getTime()-(new Date(b.starttime)).getTime();
+      }), function(event){
         var ev = $( search_result_template(event));
         ev.click(function(){
           $.ajax({
@@ -145,7 +148,7 @@
     function bindings(){
       $("#submit").click(function(e){
         $(".everything").remove();
-        search( $("#search").val(), $("#search2").val(), changeDomOnSearch );
+        search( $("#search2").val(), $("#search").val(), changeDomOnSearch );
         e.preventDefault();
         return false;
       });
