@@ -2,16 +2,28 @@
 <h1>Scheme Event</h1>
 
 <h3> 345235442 People Scheming. How about you?</h3>
-  <div id="events">
-    <% @events.each do |event| %>
-      <div class="event-panel">
+<div id="container" class="container">
+  <div class="row-fluid">
+    <div id="events" class="span 8">
+      <% @events.each do |event| %>
+        <div class="event-panel">
 
+        </div>
+      <% end %>
+    </div>
+    <div id="your-upcomming-schemes" class="span3 offset1">
+      <ul id="user-schemes">
+        <% @current_user && @currenter.schemes %>
+          <li class="scheme">
+            <div class="scheme-photo">
+              
+            </div>
+          </li>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-  <div id="your-upcomming-schemes">
-    
-  </div>
+</div>
 
 <script>
   window.onLoad(function(){
