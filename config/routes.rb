@@ -2,8 +2,10 @@ Screamzone::Application.routes.draw do
   resources :messages
 
 
-  resources :schemes
-  resources :events
+ 
+  resources :events do
+     resources :schemes
+  end
   resources :users
   resources :sessions
 

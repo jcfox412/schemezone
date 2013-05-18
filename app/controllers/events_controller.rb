@@ -15,7 +15,15 @@ class EventsController < ApplicationController
   def show
     @event = Event.find_by_stubhub_eventId(params[:id])
 
-    @schemes = @event.schemes.where(:team_name => params[:team_name])
+    @schemes = @event.schemes.where(:team_name => params[:team])
+
+    @locs = UserEvent.where(:event_id => @event.id)
+
+    if @current_user && UserEvent.where(:event_id => @event.id, :user_id => @current_user.id).count == 1
+      @already_have_loc = true
+    else
+      @already_have_loc = false
+    end
 
     @team = params[:team]
     

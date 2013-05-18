@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130518062119) do
+ActiveRecord::Schema.define(:version => 20130518160707) do
 
   create_table "events", :force => true do |t|
     t.string   "stubhub_eventId"
@@ -36,14 +36,29 @@ ActiveRecord::Schema.define(:version => 20130518062119) do
   create_table "schemes", :force => true do |t|
     t.string   "type"
     t.string   "creator_id"
-    t.string   "string"
     t.text     "description"
     t.string   "title"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "stubhub_eventId"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "image_url"
     t.string   "team_name"
+    t.integer  "event_id"
+  end
+
+  create_table "user_events", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "left"
+    t.integer  "top"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_scheme_watchlists", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "scheme_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

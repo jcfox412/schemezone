@@ -1,4 +1,7 @@
 class SchemesController < ApplicationController
+
+  before_filter :get_scheme
+
   # GET /schemes
   # GET /schemes.json
   def index
@@ -40,8 +43,12 @@ class SchemesController < ApplicationController
   # POST /schemes
   # POST /schemes.json
   def create
-    @scheme = Scheme.new(params[:scheme])
+    @scheme = @event.schemes.build(params[:scheme])
 
+    if !UserEvent.exists?(:user_id => @current_user.id, :event_id => params[:event_id])
+      UserEvent.create(:user_id => @current_user.id, :event_id => params[:event_id], :left => params[:left], :top => params[:top])
+    end
+    
     respond_to do |format|
       if @scheme.save
         format.html { redirect_to @scheme, notice: 'Scheme was successfully created.' }
@@ -79,5 +86,10 @@ class SchemesController < ApplicationController
       format.html { redirect_to schemes_url }
       format.json { head :no_content }
     end
+  end
+
+  protected
+  def get_scheme
+    @event =  Event.find(params[:event_id])
   end
 end
