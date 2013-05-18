@@ -1,0 +1,48 @@
+#nav {
+    margin: 0 0 0 0;
+    color: #444;
+    padding: 10px 20px 11px 20px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+#nav a:not(.notabutton), #user-area, .abutton {
+    cursor: pointer;
+    background-color: #444 ;
+    color: #fff;
+    padding: 6px 11px 6px 11px;
+    text-decoration: none;
+    -webkit-transition: background-color .15s ease-in;
+    -moz-transition: background-color .15s ease-in;
+    -o-transition: background-color .15s ease-in;
+    transition: background-color .15s ease-in;
+    -webkit-transition: color .15s ease-in;
+    -moz-transition: color .15s ease-in;
+    -o-transition: color .15s ease-in;
+    transition: color .15s ease-in;
+}
+
+#nav a:hover:not(.notabutton), #user-area:hover, .abutton:hover, #mailbox-nav .active {
+    color: #444;
+    padding: 6px 11px 6px 11px;
+    text-decoration: none;
+    -webkit-transition: color .45s ease-in;
+    -moz-transition: color .45s ease-in;
+    -o-transition: color .45s ease-in;
+    transition: color .45s ease-in;
+    background-color: #fff;
+    -webkit-transition: background-color .15s ease-in;
+    -moz-transition: background-color .15s ease-in;
+    -o-transition: background-color .15s ease-in;
+    transition: background-color .15s ease-in;
+}
+
+.grey {
+    background-color: #D9D9D9;
+}
