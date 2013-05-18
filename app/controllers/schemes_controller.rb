@@ -95,4 +95,5 @@ class SchemesController < ApplicationController
   def get_event
     @event =  Event.find(params[:event_id])
   end
+
 end

@@ -165,13 +165,11 @@ $(document).ready(function(){
 
 
 <% @schemes.each do |s| %>
-    <a href="<%= event_scheme_path(@event,s)%>">
-        <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
-          <h3><%= s.title %></h3>
-          <p><%= s.description %></p>
-          
-        </div>
-    </a>
+    <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
+      <h3><%= s.title %></h3>
+      <p><%= s.description %></p>
+      
+    </div>
 <% end %>
 
 
