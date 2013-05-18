@@ -23,6 +23,7 @@
 	border: 1px solid #a4c3ca;
 	font: normal 13px 'trebuchet MS', arial, helvetica;
 	background: #f1f1f1;
+	color: #000;
 	
 	-moz-border-radius: 50px 3px 3px 50px;
 	 border-radius: 50px 3px 3px 50px;
@@ -92,17 +93,17 @@
        border: 0;  /* Small centering fix for Firefox */
 }		
 
-#search, #search2::-webkit-input-placeholder {
+#search::-webkit-input-placeholder, #search2::-webkit-input-placeholder {
    color: #9c9c9c;
    font-style: italic;
 }
 
-#search, #search2:-moz-placeholder {
+#search:-moz-placeholder, #search2:-moz-placeholder {
    color: #9c9c9c;
    font-style: italic;
 }  
 
-#search, #search2:-ms-placeholder {
+#search:-ms-placeholder , #search2:-ms-placeholder {
    color: #9c9c9c;
    font-style: italic;
 } 
