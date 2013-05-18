@@ -1,7 +1,53 @@
 <script>
 $(document).ready(function(){
-  $('#message-submit').click(function(){
     <% if @current_user %>
+    var posX = ""
+    var posY = ""
+    var picked = false
+
+    $("#pin").hide()
+    $('#map3').mousemove(function(e){
+        if (!picked){
+             var parentOffset = $(this).parent().offset(); 
+               //or $(this).offset(); if you really just want the current element's offset
+               posX = e.pageX - parentOffset.left - 24;
+               posY = e.pageY - parentOffset.top - 40;
+             $("#pin").show()
+             $("#pin").css("left", posX + "px")
+             $("#pin").css("top", posY + "px")
+             console.log(posX + " " + posY)
+        }
+    });
+
+    $('#map3').dblclick(function(){
+        picked = false
+        $('#temp-loc').html("")
+    })
+
+    $('#map3').click(function(){
+        $('#temp-loc').html("Your location is saved!")
+        picked = true
+    });
+
+    $('#add-scheme-btn').click(function(){
+      $.ajax({
+            type: "POST",
+            url: "/add-scheme/",
+            data: {
+                  scheme_id: <%= @scheme.id %>,
+                  user_id: <%= @current_user.id %>,
+                  'left': posX,
+                  'top': posY
+            },
+            dataType: "json",
+            success: function(data){
+                location.reload()
+            }
+        });
+
+    })
+
+    $('#message-submit').click(function(){
         $.ajax({
             type: "POST",
             url: "/events/<%= @scheme.event.id %>/schemes/<%= @scheme.id %>/messages/",
@@ -14,15 +60,58 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data){
-                //location.reload()
+                location.reload()
             }
         });
+      })
+
+        
     <% end %>
-  })
+  
 })
 
 </script>
 
+<% if @current_user && !@scheme.users.include?(@current_user) %>
+
+
+
+
+
+
+<a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    Add To Your Watchlist!
+  </div>
+  <div class="modal-body">
+   
+
+  
+    <% if !@already_have_loc %>
+
+         Pick your location below by clicking on the map. Double click to change:
+        <div "temp-loc" > </div>
+
+        <div id="map3" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
+            <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
+        </div>
+         <button type="submit" id="add-scheme-btn" class="btn">Add!</button>
+
+    <% end%>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+
+
+
+
+
+<% end %>
 
 <p id="notice"><%= notice %></p>
 
@@ -42,7 +131,7 @@ $(document).ready(function(){
   <%= @scheme.title %>
 </p>
 
-
+<h1> Users </h1>
 <% @scheme.users.each do |u| %>
     <div style="width:300px; height:100px; background:grey" class ="user">
       <h3><%= u.name %></h3>
@@ -51,10 +140,11 @@ $(document).ready(function(){
 <% end %>
 
 
+<h1> Messages </h1>
 <% @scheme.messages.each do |m| %>
     <div style="width:300px; height:100px; background:grey">
       <h3><%= m.content %></h3>
-      <h3><%= m.user.name %></h3>
+      <h4>By <%= m.user.name %></h4>
     </div>
    
 <% end %>
@@ -65,6 +155,10 @@ $(document).ready(function(){
 <br />
 
 <button type="submit" id="message-submit" class="btn"> Submit!</button>
+
+
+
+
 
 
 

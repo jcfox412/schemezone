@@ -19,11 +19,8 @@ class EventsController < ApplicationController
 
     @locs = UserEvent.where(:event_id => @event.id)
 
-    if @current_user && UserEvent.where(:event_id => @event.id, :user_id => @current_user.id).count == 1
-      @already_have_loc = true
-    else
-      @already_have_loc = false
-    end
+    @already_have_loc = UserEvent.user_has_this_event(@current_user, @event.id)
+
 
     @team = params[:team]
     

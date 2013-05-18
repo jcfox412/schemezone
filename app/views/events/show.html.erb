@@ -41,8 +41,8 @@ $(document).ready(function(){
                 for (var j = 0; j < users.length; j++){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
-                        if (locs[i].user_id = u_id){
-                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + locs[i].left + 'px; top: ' + locs[i].top +'px"/>')
+                        if (locs[k].user_id == u_id){
+                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + locs[k].left + 'px; top: ' + locs[k].top +'px"/>')
                         }
                     }
                     
@@ -165,11 +165,13 @@ $(document).ready(function(){
 
 
 <% @schemes.each do |s| %>
-    <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
-      <h3><%= s.title %></h3>
-      <p><%= s.description %></p>
-      
-    </div>
+    <a href="<%= event_scheme_path(@event,s) %>">
+        <div style="width:300px; height:100px; background:grey" class ="schemes" data-id="<%= s.id %>">
+          <h3><%= s.title %></h3>
+          <p><%= s.description %></p>
+          
+        </div>
+    </a>
 <% end %>
 
 
