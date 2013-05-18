@@ -1,0 +1,10 @@
+<div id="">
+	<% @schemes.each do |schemes| %>
+		<a href='<%= scheme_path(.id) %>'> 
+			<div class="scheme-icon" style="background-image: url('http://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Bill_Clinton.jpg/220px-Bill_Clinton.jpg');">
+				<div class="title-bottom"><%= scheme.title %>
+				</div>
+			</div>
+		</a>
+	<% end %>
+</div>

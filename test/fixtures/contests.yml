@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  image_url: MyString
+  team_admin_id: 1
+  event_id: 1
+  description: MyText
+  title: MyString
+  start_time: 2013-05-18 13:07:34
+  end_time: 2013-05-18 13:07:34
+
+two:
+  image_url: MyString
+  team_admin_id: 1
+  event_id: 1
+  description: MyText
+  title: MyString
+  start_time: 2013-05-18 13:07:34
+  end_time: 2013-05-18 13:07:34

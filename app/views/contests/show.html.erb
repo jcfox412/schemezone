@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Image url:</b>
+  <%= @contest.image_url %>
+</p>
+
+<p>
+  <b>Team admin:</b>
+  <%= @contest.team_admin_id %>
+</p>
+
+<p>
+  <b>Event:</b>
+  <%= @contest.event_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @contest.description %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @contest.title %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @contest.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @contest.end_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_contest_path(@contest) %> |
+<%= link_to 'Back', contests_path %>
