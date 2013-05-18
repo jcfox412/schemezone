@@ -4,6 +4,17 @@ $(document).ready(function(){
     var posY = ""
     var picked = false
     $("#pin").hide()
+
+
+    function addMyMarker() {
+        <% if @my_loc %>
+        $('#map2').append('<image class="ping" src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>) +'px"/>');
+        <% end %>
+
+    }
+
+    addMyMarker();
+
     $('#map').mousemove(function(e){
         if (!picked){
              var parentOffset = $(this).parent().offset();
@@ -27,6 +38,7 @@ $(document).ready(function(){
     window.locs = <%= raw @locs.to_json %>
     $('.scheme').hover(function(){
          $('#map2').html("");
+         addMyMarker();
         id = $(this).attr('data-id')
         for (var i = 0; i < schemes.length; i++){
             if (schemes[i].id == id){
@@ -35,7 +47,7 @@ $(document).ready(function(){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
                         if (locs[k].user_id == u_id){
-                            $('#map2').append('<image class="ping" src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
+                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
                         }
                     }
                 }
@@ -44,6 +56,7 @@ $(document).ready(function(){
         }
     }).mouseleave(function(){
          $('#map2').html("");
+         addMyMarker();
     });
     <% if !@current_user %>
         $('#create-scheme-btn').hide()
@@ -75,7 +88,7 @@ $(document).ready(function(){
         return false;
     })  
     <% end%>
-});
+    });
 </script>
 
 <p id="notice"><%= notice %></p>
