@@ -1,0 +1,31 @@
+<h1>Listing schemes</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Creator</th>
+    <th>String</th>
+    <th>Description</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @schemes.each do |scheme| %>
+  <tr>
+    <td><%= scheme.type %></td>
+    <td><%= scheme.creator_id %></td>
+    <td><%= scheme.string %></td>
+    <td><%= scheme.description %></td>
+    <td><%= scheme.title %></td>
+    <td><%= link_to 'Show', scheme %></td>
+    <td><%= link_to 'Edit', edit_scheme_path(scheme) %></td>
+    <td><%= link_to 'Destroy', scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scheme', new_scheme_path %>

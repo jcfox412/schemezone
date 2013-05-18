@@ -1,4 +1,13 @@
 Screamzone::Application.routes.draw do
+  resources :schemes
+
+
+  resources :events
+
+
+  resources :users
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

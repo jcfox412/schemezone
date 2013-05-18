@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @scheme.type %>
+</p>
+
+<p>
+  <b>Creator:</b>
+  <%= @scheme.creator_id %>
+</p>
+
+<p>
+  <b>String:</b>
+  <%= @scheme.string %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @scheme.description %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @scheme.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_scheme_path(@scheme) %> |
+<%= link_to 'Back', schemes_path %>

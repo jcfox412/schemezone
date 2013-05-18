@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stubhub userid:</b>
+  <%= @user.stubhub_userId %>
+</p>
+
+<p>
+  <b>Seat:</b>
+  <%= @user.seat %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
