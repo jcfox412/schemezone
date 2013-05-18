@@ -14,6 +14,7 @@
 		);
 		_.each(matches, function(event){
 			var ev = $("<div class='event'>"+event.name+"</div>");
+			console.log(event.performers);
 			ev.click(function(){
 				$.ajax({
 						type: 'POST',
@@ -28,7 +29,8 @@
 							}
 						},
 				});
-				$("#team-select").html(team_select_template(event)).show();
+
+				$("#team-select").html(team_select_template(event)).modal();
 			});
 			$("#events").append(ev);
 		});
@@ -43,5 +45,6 @@
 			return false;
 		});
 	}
+	$(".box").on("")
 	bindings();
 });
