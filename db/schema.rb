@@ -13,6 +13,18 @@
 
 ActiveRecord::Schema.define(:version => 20130518174731) do
 
+  create_table "contests", :force => true do |t|
+    t.string   "image_url"
+    t.integer  "team_admin_id"
+    t.integer  "event_id"
+    t.text     "description"
+    t.string   "title"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "stubhub_eventId"
     t.datetime "created_at",      :null => false
@@ -43,11 +55,20 @@ ActiveRecord::Schema.define(:version => 20130518174731) do
     t.string   "image_url"
     t.string   "team_name"
     t.integer  "event_id"
+    t.boolean  "is_endorsed"
+    t.string   "endorsed_by"
   end
 
   create_table "schemes_users", :force => true do |t|
     t.integer "user_id"
     t.integer "scheme_id"
+  end
+
+  create_table "team_admins", :force => true do |t|
+    t.string   "team_name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "user_events", :force => true do |t|
@@ -69,4 +90,3 @@ ActiveRecord::Schema.define(:version => 20130518174731) do
   end
 
 end
-
