@@ -1,23 +1,20 @@
-<h1>Listing events</h1>
 
-<table>
-  <tr>
-    <th>Stubhub eventid</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Scheme Event</h1>
 
-<% @events.each do |event| %>
-  <tr>
-    <td><%= event.stubhub_eventId %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<h3> 345235442 People Scheming. How about you?</h3>
+  <div id="events">
+    <% @events.each do |event| %>
+      <div class="event-panel">
 
-<br />
+      </div>
+    <% end %>
+  </div>
+  <div id="your-upcomming-schemes">
+    
+  </div>
 
-<%= link_to 'New Event', new_event_path %>
+<script>
+  window.onLoad(function(){
+    start_masonry("events");
+  });
+</script>
