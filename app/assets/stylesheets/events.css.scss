@@ -2,17 +2,59 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .scheme {
 	width: 700px;
 }
 
-.event-panel {
-	width: 60px;
-	height: 30px;
-}
+
 #search, #search2, #submit
 {
 	float: left;
+}
+
+.strip {
+	width: auto;
+	padding: 0px;
+	text-align: center;
+	background: #222;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+footer {
+	margin-top: 20px;
+	text-align: center;
+	background-color: #222;
+	padding: 20px 0;
+	color: #eee;	
+	width: 100%	
+}
+
+#bgcarousel {
+	height: 400px;
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	z-index: -9999;
+	.mask {
+    position: absolute;
+    top: 0px; left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* to make clicks pass through */
+    box-shadow: 0 0 900px #000000 inset;
+	}
+	.item {
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		text-align: center;
+		width: 100%;
+		height: 400px;
+		background-size: 100% 400px;
+		background-repeat: no-repeat;
+	}
 }
 
 #search, #search2
@@ -38,7 +80,9 @@
 	 border-radius: 3px 3px 3px 3px;  
 }
 
-#searchbox {
+#search-container {
+	margin-left: 80px;	
+	margin-top: 120px;
 }
 
 /* ----------------------- */
@@ -108,6 +152,7 @@
    font-style: italic;
 } 
 
+
 .event-panel {
 	float: left;
 	height: 50px;
@@ -125,10 +170,6 @@
 		float: left;
 		display: inline-block;
 	}
-
-	a:hover {
-		color: rgb(0,30,255);
-	}
 }
 
 #team1, #team2 {
@@ -144,6 +185,7 @@
 #events-container {
 	display:none;
 	.event {
+		padding: 10px;
 		cursor: pointer;
 		&:hover {
 			background-color: #000;

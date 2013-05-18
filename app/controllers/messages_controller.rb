@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     end
   end
 
-   protected
+  protected
   def get_scheme
       @scheme = schemes.find(params[:scheme_id]) if params[:scheme_id]
       redirect_to root_url unless defined?(@scheme)
