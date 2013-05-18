@@ -28,6 +28,7 @@
 }
 
 
+
 footer {
 	margin-top: 20px;
 	text-align: center;
@@ -187,9 +188,14 @@ footer {
 	vertical-align:middle;
 }
 
+
 #events-container {
 	display:none;
+	width: 100%;
+	text-align: center;
 	.event {
+		width: 520px;
+		margin: 0 auto;
 		padding: 10px;
 		cursor: pointer;
 		border-radius: 5px;
