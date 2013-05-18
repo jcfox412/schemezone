@@ -1,23 +1,30 @@
-
-
-    function search(name, loc, callback){
-        $.ajax({
-            type: "GET",
-            url: "http://www.zvents.com/partner_rest/search",
-            crossDomain: true,
-            data: { 
-                key: "TEKACENXPPGFKKYYCOIKWIUALTPNABMORQSXJBWOMNNEVDLQAFNUMJTQRIJWBCRX", 
-                where: loc,
-                what: name,
-                format : "json",
-                cat: "9"
-            },
-            dataType: "json",
-            success: function(data){
-                obj = data.rsp.content.events
-                callback(obj);
-            }
-        });
-
+var search_cur=0;
+var last;
+function search(name, loc, callback, last){
+    if (last){
+        last.offset = 10*search_cur;
+    } else {
+        search_cur = 0;
+        last = {
+            key: "TEKACENXPPGFKKYYCOIKWIUALTPNABMORQSXJBWOMNNEVDLQAFNUMJTQRIJWBCRX", 
+            where: loc,
+            what: name,
+            format : "json",
+            cat: "9",
+        }
     }
+    $.ajax({
+        type: "GET",
+        url: "http://www.zvents.com/partner_rest/search",
+        crossDomain: true,
+        data: last,
+        dataType: "json",
+        success: function(data){
+            obj = data.rsp.content.events
+            callback(obj, data.rsp.content.next_page);
+            search_cur += 1;
+        }
+    });
+
+}
 
