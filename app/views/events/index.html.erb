@@ -1,4 +1,14 @@
 
+<!-- <input type="text" id="username"></input>
+<input type="password" id="password"></input>
+<div class="btn" id="login-button">Login</div> -->
+
+<%= form_tag sessions_path do %>
+    <%= text_field_tag :email, params[:email] %>
+    <%= password_field_tag :password %>
+  <p class="button"><%= submit_tag %></p>
+<% end %>
+
   <h3> 345235442 People Scheming. How about you?</h3>
   <div class="row-fluid">
     <div id="events" class="span 8">
@@ -14,7 +24,6 @@
           <% @current_user.schemes do |scheme| %>
             <li class="scheme">
               <div class="scheme-photo">
-
               </div>
               <div>
                 
@@ -32,3 +41,42 @@
     start_masonry("events");
   });
 </script>
+
+<!-- <script>
+//   $("#login-button").click(function() {
+
+//     var stubhubUsername = $("#username").val();
+//     var stubhubPassword = $("#password").val();
+
+//     var key = "5cfU2M9gXRfhdktEnM5kjmEtw9Ma"
+//     var secret = "lmHzeIl6N5Fzr7QsI5Q7zik1uTAa"
+
+//     var authorizationToken = utf8_to_b64(key + ":" + secret);
+
+//     $.ajax({
+//       type: 'POST',
+//       crossDomain: true,
+//       url: 'https://api.stubhub.com/login',
+//       beforeSend: function (request) {
+//         request.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded; charset=UTF-8');
+//         request.setRequestHeader("Authorization", "Basic " + authorizationToken);
+//       },
+//       data: {
+//         'grant_type': 'password',
+//         'username': stubhubUsername,
+//         'password': stubhubPassword,
+//         'scope': 'PRODUCTION'
+//       },
+//       success: function(e) {
+//         console.log("made it!");
+//       }
+
+//     })
+
+//   });
+
+//   function utf8_to_b64( str ) {
+//     return window.btoa(unescape(encodeURIComponent( str )));
+// }
+// </script>
+-->
