@@ -1,34 +1,65 @@
+ 
 
-  <h3> 345235442 People Scheming. How about you?</h3>
-  <div class="row-fluid">
-    <div id="events" class="span 8">
-      <% @events.each do |event| %>
-        <div class="event-panel">
-
+  <div class="container">
+      <div id="searchbox">
+        <input id="search" type="text" placeholder="San Francisco">
+        <input id="search2" type="text" placeholder="Packers">
+        <input id="submit" type="submit" value="Scheme">
+      </div>
+  </div>
+  <div class="container">
+    <div class="row-fluid" id="main-container">
+      <h4> 345235442 People Scheming. How about you?</h4>
+      <div id="events-container" class="span7">
+        <div id="events">
+            <div class="event-panel">
+              sdfsdsdgsdg
+            </div>
+            <div class="event-panel">
+              sdfsdsdgsdg
+            </div>
+            <div class="event-panel">
+              sdfsdsdgsdg
+            </div>
+            <div class="event-panel">
+              sdfsdsdgsdg
+            </div>
+            <% @events.each do |event| %>
+            <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
-    <div id="your-upcomming-schemes" class="span3 offset1">
-      <ul id="user-schemes">
-        <% if @current_user %>
+
+    <!-- if current_user div -->
+    <% if @current_user %>
+      <div id="your-upcomming-schemes" class="span2 offset1">
+        <ul id="user-schemes">
+          <!-- start schemes -->
           <% @current_user.schemes do |scheme| %>
             <li class="scheme">
-              <div class="scheme-photo">
-
+              <img class="photo" style="background-image:<%= scheme.image %>" />
+              <div class="versus">
+                <span class="team-first">
+                  <%= scheme.event.team1 %>
+                </span>
+                <span>
+                  <%= scheme.event.team2 %>
+                </span>
               </div>
-              <div>
-                
+              <div class="scheme-type" <%= toHTMLDataAttr(scheme.type) %>>
               </div>
             </li>
           <% end %>
-        <% end %>
+          <!-- end schemes -->
+        </div>
       </div>
-    </div>
+    <% end %> 
+    <!-- end if current_user div -->
+
+
   </div>
 
 
-<script>
-  $(document).ready(function(){
-    start_masonry("events");
-  });
+<script type="text/template" id="search-item-template">
+  [[= title ]]
 </script>

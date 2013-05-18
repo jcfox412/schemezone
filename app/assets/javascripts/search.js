@@ -26,8 +26,7 @@
                    events.push({"id": id, "name" : name, "images":images})
 
                 });
-                console.log(events)
-                callback(events)
+                callback(events);
             }
         });
 
