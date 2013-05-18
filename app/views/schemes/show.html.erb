@@ -29,7 +29,7 @@ $(document).ready(function(){
         picked = true
     });
 
-    $('#add-scheme-btn').click(function(){
+    $('#add-scheme-btn, #add-to-watch-already-exists-btn').click(function(){
       $.ajax({
             type: "POST",
             url: "/add-scheme/",
@@ -78,7 +78,7 @@ $(document).ready(function(){
 
 
 
-
+<% if !@already_have_loc %>
 <a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -88,7 +88,7 @@ $(document).ready(function(){
    
 
   
-    <% if !@already_have_loc %>
+    
 
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
@@ -98,13 +98,18 @@ $(document).ready(function(){
         </div>
          <button type="submit" id="add-scheme-btn" class="btn">Add!</button>
 
-    <% end%>
+    
   </div>
 
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
+
+<% else %>
+<a role="button" id = 'add-to-watch-already-exists-btn' class="btn"> Add To Your Watchlist</a>
+
+<% end%>
 
 
 
