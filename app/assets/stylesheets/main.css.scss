@@ -45,6 +45,23 @@ ul li {
     cursor: pointer;
 }
 
+.search-image-wrapper {
+    margin-right: 10px;
+    padding: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd #cacaca #acacac;
+    line-height: 0;
+    display: inline-block;
+    background-color: #ddd;
+    position: relative;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 4px 2px -2px rgba(0,0,0,0.1),0 0 0 #000;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,0.1),0 0 0 #000;
+}
+
 #notifications:hover {
     background: #fff;
     padding-bottom: 9px;

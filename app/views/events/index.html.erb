@@ -66,12 +66,13 @@
       </div>
     <% end %> 
     <!-- end if current_user div -->
+    
   </div>
   <div class="modal clearfix" id="team-select">
   </div>
 
 <script type="text/template"  id="search-results-template">
-  <h4> [[= count ]] Results</h4>
+  <h4> Displaying [[= count ]] Results</h4>
   <div id="events">
   </div>
 </script>
@@ -87,7 +88,7 @@
 
 <script type="text/template" id="search-result-template">
   <div class="event clearfix">
-    <div class="pull-left">
+    <div class="pull-left search-image-wrapper">
       <img src="[[= images[0].url ]]"></img>
     </div>
     <div class="pull-left" style="padding: 0 10px;">
@@ -102,13 +103,9 @@
     $('.carousel').carousel({interval: 5000, pause: "false" });
     var search_template = _.template($("#search-results-template").html());
     var team_select_template = _.template($("#modal-popup").html());
-    var _search_result_template = _.template($("#search-result-template").html());
+    var search_result_template = _.template($("#search-result-template").html());
 
-    function search_result_template(o){
-      return $.parseHTML(_search_result_template(o));
-    }
-
-    function changeDomOnSearch(events){
+    function changeDomOnSearch(events, next){
       $("#schema-container").remove();
       var matches = _.filter(events, function(event){
                       return event.performers.length == 2;
