@@ -1,8 +1,5 @@
 
-<h1>Scheme Event</h1>
-
-<h3> 345235442 People Scheming. How about you?</h3>
-<div id="container" class="container">
+  <h3> 345235442 People Scheming. How about you?</h3>
   <div class="row-fluid">
     <div id="events" class="span 8">
       <% @events.each do |event| %>
@@ -17,6 +14,9 @@
           <% @current_user.schemes do |scheme| %>
             <li class="scheme">
               <div class="scheme-photo">
+
+              </div>
+              <div>
                 
               </div>
             </li>
@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <script>
   $(document).ready(function(){

@@ -3,13 +3,13 @@
 <head>
   <title>Screamzone</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "jquery", "jquery_ujs" %>
+  <%= javascript_include_tag "application" %>
 </head>
 <body>
 
-<%= yield %>
-
+	<%= yield %>
 	<script>
 	$(document).ajaxSend(function(e, xhr, options) {
 	  var token = $("meta[name='csrf-token']").attr("content");
