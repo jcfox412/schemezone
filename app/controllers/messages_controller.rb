@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_filter :require_login, :get_scheme
 
   def create
-    @message = @scheme.build(params[:message])
+    @message = @scheme.messages.build(params[:message])
     @message.user_id = @current_user.id
 
     if @message.save
@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
 
   protected
   def get_scheme
-      @scheme = schemes.find(params[:scheme_id]) if params[:scheme_id]
+      @scheme = Scheme.find(params[:scheme_id]) if params[:scheme_id]
       redirect_to root_url unless defined?(@scheme)
   end
 

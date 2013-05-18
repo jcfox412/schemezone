@@ -1,5 +1,25 @@
 <script>
-
+$(document).ready(function(){
+  $('#message-submit').click(function(){
+    <% if @current_user %>
+        $.ajax({
+            type: "POST",
+            url: "/events/<%= @scheme.event.id %>/schemes/<%= @scheme.id %>/messages/",
+            data: {
+                message:{
+                    scheme_id: <%= @scheme.id %>,
+                    user_id: <%= @current_user.id %>,
+                    content: $('#message').val()
+                }
+            },
+            dataType: "json",
+            success: function(data){
+                //location.reload()
+            }
+        });
+    <% end %>
+  })
+})
 
 </script>
 
@@ -32,7 +52,7 @@
 
 
 <% @scheme.messages.each do |m| %>
-    <div style="width:300px; height:100px; background:grey" class ="user">
+    <div style="width:300px; height:100px; background:grey">
       <h3><%= m.content %></h3>
       <h3><%= m.user.name %></h3>
     </div>
@@ -43,6 +63,7 @@
 
 </textarea>
 <br />
+
 <button type="submit" id="message-submit" class="btn"> Submit!</button>
 
 
