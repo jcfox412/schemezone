@@ -17,6 +17,7 @@ class SchemesController < ApplicationController
   # GET /schemes/1.json
   def show
     @scheme = Scheme.find(params[:id])
+    @already_have_loc = UserEvent.user_has_this_event(@current_user, @event.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,10 +47,11 @@ class SchemesController < ApplicationController
     @scheme = @event.schemes.build(params[:scheme])
 
     
+    UserEvent.create_if_not_exists(@current_user,@event.id, params[:left], params[:top])
 
-    if !UserEvent.exists?(:user_id => @current_user.id, :event_id => params[:event_id])
-      UserEvent.create(:user_id => @current_user.id, :event_id => params[:event_id], :left => params[:left], :top => params[:top])
-    end
+    # if !UserEvent.exists?(:user_id => @current_user.id, :event_id => params[:event_id])
+    #   UserEvent.create(:user_id => @current_user.id, :event_id => params[:event_id], :left => params[:left], :top => params[:top])
+    # end
 
     respond_to do |format|
       if @scheme.save
@@ -95,5 +97,4 @@ class SchemesController < ApplicationController
   def get_event
     @event =  Event.find(params[:event_id])
   end
-
 end
