@@ -88,11 +88,53 @@ $(document).ready(function(){
             }
         });
         return false;
-    })  
+    })
+
+    $("#send-message-submit").click(function() {
+      <% @event.schemes.each do |s| %>
+          $.ajax({
+            type: "POST",
+            url: "/events/<%= @event.id %>/schemes/<%= s.id %>/messages/",
+            data: {
+                message:{
+                    scheme_id: <%= s.id %>,
+                    user_id: <%= @current_user.id %>,
+                    content: $('#admin-message').val()
+                }
+            },
+            dataType: "json",
+            success: function(data){
+            }
+        });
+      <% end %>
+
+      $("#adminModal").modal("hide");
+    })
     <% end%>
     });
 </script>
 <p id="notice"><%= notice %></p>
+<div id="adminModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+  <div class="modal-header">
+    Message All Users!
+  </div>
+  <div class="modal-body">
+    Message all users making schemes for this event!
+    <form class="form-horizontal" >     
+      <div class="control-group">
+        <label class="control-label" for="message">Message</label>
+        <div class="controls">
+          <textarea id="admin-message" placeholder="Enter message"> </textarea>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <div id="send-message-submit" class="btn">Message Users!</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     Start a Scheme!
@@ -137,6 +179,15 @@ $(document).ready(function(){
       Schemes:<span class="text-number-special"><%= @event.schemes.count %></span>
       Schemers:<span class="text-number-special"><%= @event.schemers %></span>
       <input id="create-scheme-btn" data-toggle="modal" type="submit" value="Start a Scheme" href="#myModal">
+      <% is_admin = false %>
+      <% @current_user.team_admins.each do |a| %>
+        <% if (a.team_name == @event.team_1) || (a.team_name == @event.team_2) %>
+          <% is_admin = true %>
+        <% end %>
+      <% end %>
+      <% if is_admin %>
+        <input id="message-event-btn" data-toggle="modal" type="submit" value="Message All Users" href="#adminModal">
+      <% end %>
   </div>
   <div>
     <div class="row clearfix" style="margin-right: -5px;">

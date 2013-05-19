@@ -27,6 +27,9 @@ class ContestsController < ApplicationController
   # POST /contests
   # POST /contests.json
   def create
+
+    params[:contest][:team_admin_id] = @current_user.id
+    params[:contest][:event_id] = @event.id
     @contest = Contest.new(params[:contest])
 
     respond_to do |format|

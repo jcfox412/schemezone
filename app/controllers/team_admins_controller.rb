@@ -16,6 +16,8 @@ class TeamAdminsController < ApplicationController
   # POST /team_admins
   # POST /team_admins.json
   def create
+
+    params[:team_admin][:user_id] = @current_user.id
     @team_admin = TeamAdmin.new(params[:team_admin])
 
     respond_to do |format|
