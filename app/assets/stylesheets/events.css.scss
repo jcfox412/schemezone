@@ -39,7 +39,7 @@ footer {
 	width: 100%;
 	overflow: hidden;
 	position: absolute;
-	z-index: -9999;
+	z-index: -1;
 	.mask {
     position: absolute;
     top: 0px; left: 0px;
@@ -89,7 +89,7 @@ footer {
 
 /* ----------------------- */
 
-#submit
+#submit, #create-scheme-btn
 {		
 	background: #006bbb;
 	background-image: -moz-linear-gradient(#0088d7, #006bbb);
@@ -117,14 +117,14 @@ footer {
 	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
 
-#submit:hover
+#submit:hover, #create-scheme-btn:hover
 {		
 	background: #0088d7;
 	background-image: -moz-linear-gradient(#006bbb, #0088d7);
 	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #0088d7),color-stop(1, #006bbb));
 }	
 
-#submit:active
+#submit:active, #create-scheme-btn:active
 {		
 	background: #0088d7;
 	outline: none;
@@ -134,7 +134,8 @@ footer {
 	 box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;		
 }
 
-#submit::-moz-focus-inner
+#submit::-moz-focus-inner, #create-scheme-btn::-moz-focus-innter
+
 {
        border: 0;  /* Small centering fix for Firefox */
 }		
@@ -154,6 +155,29 @@ footer {
    font-style: italic;
 } 
 
+#create-scheme-btn {
+	text-align: center;
+	border-radius: 3px;
+	font-size: 12px;
+	line-height: 12px;
+	height: 25px;
+	padding: 5px;
+	color: #fff;
+	width: 120px;
+	text-shadow: 1px 1px  5px #000000;
+}
+
+#create-scheme-btn:hover {
+	text-align: center;
+	border-radius: 3px;
+	font-size: 12px;
+	line-height: 12px;
+	height: 25px;
+	padding: 5px;
+	color: #fff;
+	width: 120px;
+	text-shadow: 1px 1px  1px #000000;
+}
 
 .event-panel {
 	float: left;
@@ -192,11 +216,13 @@ html {
 	padding: 0px 0px 0px 0px;
 	margin-right: -15px;
 	height: 400px;
+	background: rgba(115, 207, 255, 0.07);
 	overflow: scroll;
 }
 
 #map2 {
-	background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); 
+	background-image:url('/assets/map.png'); 
+	background-color: #f5f5f5;
 	background-size: 400px 400px; 
 	width: 400px; 
 	height: 400px; 
@@ -267,25 +293,21 @@ html {
 }
 
 #title-2 {
-	-webkit-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
-	box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
-	border-top: 1px solid #d0d0d0;
-	border-bottom: 1px solid #d0d0d0;
-	-webkit-box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
-	box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2),0 0 0 #000;
-	border-top: 1px solid #d0d0d0;
+	margin-top: -10px;
+	margin-bottom: -10px;
 	font-size: 13px;
 	line-height: 18px;
 	color: #fff;
 	text-align: center;
-	background-color: #333	;
+	background-color: rgba(16, 67, 104, .8)	;
+	text-shadow: 2px 2px  5px #000000;
 }
 
 
 #event-show-info {
 	height: 30px;
 	color: #fff;
-	background-color: #4F4F4F;
+	background-color: rgba(35, 125, 186, .8);
 	margin-top: -1px;
 	text-align: center;
 	margin-left: auto;
@@ -293,8 +315,13 @@ html {
 	padding-top: 5px;
 }
 
+#scheme-section-title {
+
+}
+
 .text-number-special {
-	background-color: #008FFC;
+	background-color: rgb(19, 67, 99);
+	border: 1px solid rgba(0,0,0,.5);
 	color: #fff;
 	padding: 2px 4px;
 	margin: 0 5px;
@@ -312,6 +339,10 @@ html {
 	margin-left: -10px
 }
 
+#super-show-wrapper {
+	background-color: #324523;
+}
+
 #show-wrapper {
 	overflow: hidden;
 	margin: 0px auto;
@@ -323,4 +354,7 @@ html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	-webkit-box-shadow: 0 0 3px #e1e1e3;
+	-moz-box-shadow: 0 0 3px #e1e1e3;
+	box-shadow: 0 0 3px #e1e1e3;
 	}
