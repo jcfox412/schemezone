@@ -3,38 +3,39 @@ $(document).ready(function(){
     var posX = ""
     var posY = ""
     var picked = false
-    $("#pin").hide()
-
-
+    $("#pin").hide();
+    var currentMousePos = { x: -1, y: -1 };
+    $(document).mousemove(function(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    });
     function addMyMarker() {
         <% if @my_loc %>
         $('#map2').append('<image class="ping" src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>) +'px"/>');
         <% end %>
 
     }
-
     addMyMarker();
-
+    var override = false;
     $('#map').mousemove(function(e){
-        if (!picked){
+        if (!picked || e.isTriggered){
              var parentOffset = $(this).parent().offset();
-               posX = e.pageX - parentOffset.left - 24;
-               posY = e.pageY - parentOffset.top - 40;
-             $("#pin").show()
-             $("#pin").css("left", posX + "px")
-             $("#pin").css("top", posY + "px")
-             console.log(posX + " " + posY)
+               posX = currentMousePos.x- parentOffset.left - 24;
+               posY = currentMousePos.y - parentOffset.top - 40;
+             $("#pin").show();
+             $("#pin").css("left", posX + "px");
+             $("#pin").css("top", posY + "px");
         }
-    });
-    $('#map').dblclick(function(){
+        override = false;
+    }).dblclick(function(){
         picked = false;
-        $("#map").trigger("mousemove");
+        override = true;
+        $("#map").mousemove();
         $('#temp-loc').html("");
-    })
-    $('#map').click(function(){
+    }).click(function(){
         $('#temp-loc').html("Your location is saved!")
         picked = true
-    });
+    })
     window.schemes =  <%= raw @schemes.to_json %>
     window.locs = <%= raw @locs.to_json %>
     $('.scheme').hover(function(){
@@ -91,20 +92,16 @@ $(document).ready(function(){
     <% end%>
     });
 </script>
-
 <p id="notice"><%= notice %></p>
-
-
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     Start a Scheme!
   </div>
-
   <div class="modal-body">  
     <% if !@already_have_loc %>
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
-        <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 400px 400px; width: 400px; height: 4000px; position:relative">
+        <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 400px 400px; width: 400px; height: 400px; position:relative">
             <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
     <% end%>
@@ -115,7 +112,6 @@ $(document).ready(function(){
           <input type="text" id="title3" placeholder="Title">
         </div>
       </div>
-
       <div class="control-group">
         <label class="control-label" for="description">description</label>
         <div class="controls">
@@ -144,6 +140,7 @@ $(document).ready(function(){
   </div>
   <div>
     <div class="row clearfix" style="margin-right: -5px;">
+      <div class="event-show-spacer"></div> 
       <div id="map2" class="pull-left">
       </div>
       <div id="schemes" class="pull-left">
