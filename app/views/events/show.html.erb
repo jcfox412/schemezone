@@ -11,7 +11,7 @@ $(document).ready(function(){
     });
     function addMyMarker() {
         <% if @my_loc %>
-        $('#map2').append('<image src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>) +'px"/>');
+        $('#map2').append('<image src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>-40) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>-34) +'px"/>');
         <% end %>
 
     }
@@ -20,8 +20,8 @@ $(document).ready(function(){
     $('#map').mousemove(function(e){
         if (!picked || e.isTriggered){
              var parentOffset = $(this).parent().offset();
-               posX = currentMousePos.x- parentOffset.left - 24;
-               posY = currentMousePos.y - parentOffset.top - 40;
+               posX = currentMousePos.x- parentOffset.left - 10;
+               posY = currentMousePos.y - parentOffset.top - 20;
              $("#pin").show();
              $("#pin").css("left", posX + "px");
              $("#pin").css("top", posY + "px");
@@ -49,7 +49,7 @@ $(document).ready(function(){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
                         if (locs[k].user_id == u_id){
-                            $('#map2').append('<image class="ping" src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
+                            $('#map2').append('<image class="ping" src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left-45) + 'px; top: ' + ($('#map2').offset().top + locs[k].top-40) +'px"/>')
                         }
                     }
                 }
@@ -143,7 +143,7 @@ $(document).ready(function(){
     <% if !@already_have_loc %>
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
-        <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 400px 400px; width: 400px; height: 400px; position:relative">
+        <div id="map">
             <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
     <% end%>
