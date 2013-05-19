@@ -118,6 +118,13 @@ $(document).ready(function(){
 
 <% end %>
 
+<div class="modal clearfix" id="contest-select">
+  </div>
+
+<% if @scheme.creator_id == @current_user.id.to_s %>
+  <div id="contest" class="btn">Add to Contest</div>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 
@@ -137,6 +144,7 @@ $(document).ready(function(){
 </p>
 
 <h1> Users </h1>
+
 <% @scheme.users.each do |u| %>
     <div style="width:300px; height:100px; background:grey" class ="user">
       <h3><%= u.name %></h3>
@@ -144,6 +152,13 @@ $(document).ready(function(){
    
 <% end %>
 
+<h1> Contests </h1>
+<% @scheme.contests.each do |c| %>
+  <div style="width:300px; height:100px; background:grey" class ="user">
+    <h3><%= c.title %></h3>
+  </div>
+   
+<% end %>
 
 <h1> Messages </h1>
 <% @scheme.messages.each do |m| %>
@@ -162,7 +177,38 @@ $(document).ready(function(){
 <button type="submit" id="message-submit" class="btn"> Submit!</button>
 
 
+<script>
+  $("#contest").click(function() {
+    $("#contest-select").html(
+      ' <h3 class="modal-header">Pick a contest to enter</h3>' +
+        '<div class="modal-body">' +
+    '<% @event.contests.each do |c| %>' +
+      '<p><%= c.title %></p>' +
+      '<div class="btn contest-apply" id="contest-<%= c.id %>">Apply</div>' +
+    '<% end %> ' +
+  '</div>'
+    ).modal();
+    $(".contest-apply").click(function() {
+      contest_id = this.id.split("-")[1];
+      $.ajax({
+        url: "/events/<%= @event.id %>/contests/add_scheme",
+        type: "POST",
+        data: {
+          scheme_id: <%= @scheme.id %>,
+          contest_id: contest_id
+        },
+        success: function() {
+          location.reload();
+        }
+      })
+    })
+  })
 
+</script>
+
+<script>
+  
+</script>
 
 
 

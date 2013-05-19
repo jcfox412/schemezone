@@ -17,11 +17,13 @@ class SchemesController < ApplicationController
   # GET /schemes/1.json
   def show
     @scheme = Scheme.find(params[:id])
+
     @already_have_loc = UserEvent.user_has_this_event(@current_user, @event.id)
+
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @scheme }
+      format.json { render json: @event.scheme }
     end
   end
 

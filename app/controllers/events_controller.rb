@@ -21,6 +21,7 @@ class EventsController < ApplicationController
 
     @already_have_loc = UserEvent.user_has_this_event(@current_user, @event.id)
 
+    @my_loc = UserEvent.where(:event_id => @event.id, :user_id => @current_user.id).first
 
     @team = params[:team]
     
