@@ -27,7 +27,8 @@ $(document).ready(function(){
         }
     });
     $('#map').dblclick(function(){
-        picked = false
+        picked = false;
+        $("#map").trigger("mousemove");
         $('#temp-loc').html("");
     })
     $('#map').click(function(){
@@ -103,7 +104,7 @@ $(document).ready(function(){
     <% if !@already_have_loc %>
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
-        <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
+        <div id="map" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 400px 400px; width: 400px; height: 4000px; position:relative">
             <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
     <% end%>
@@ -121,7 +122,6 @@ $(document).ready(function(){
           <textarea id="description" placeholder="Enter description"> </textarea>
         </div>
       </div>
-
       <div class="control-group">
         <div class="controls">
           <button type="submit" id="scheme-form-submit" class="btn">Create!</button>
@@ -140,13 +140,16 @@ $(document).ready(function(){
   <div id="event-show-info">
       Schemes:<span class="text-number-special"><%= @event.schemes.count %></span>
       Schemers:<span class="text-number-special"><%= @event.schemers %></span>
-      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="create-scheme-btn"> Start a Scheme!</a>
+      <input id="create-scheme-btn" data-toggle="modal" type="submit" value="Start a Scheme" href="#myModal">
   </div>
   <div>
     <div class="row clearfix" style="margin-right: -5px;">
       <div id="map2" class="pull-left">
       </div>
       <div id="schemes" class="pull-left">
+        <div id="scheme-section-title">
+          <h3>Schemes</h3>
+        </div>
         <% @schemes.each do |s| %>
             <a href="<%= event_scheme_path(@event,s) %>">
               <div class ="scheme clearfix" data-id="<%= s.id %>">
