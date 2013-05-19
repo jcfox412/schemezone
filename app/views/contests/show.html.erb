@@ -1,37 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Image url:</b>
-  <%= @contest.image_url %>
-</p>
+<div id="contest-wrapper">
+  <% if @contest.image_url == "" %>
+    <% img_url = "http://www.archives.com/genealogy/images/clinton_genealogy.jpg" %>
+  <% else %>
+    <% img_url = @contest.image_url %>
+  <% end %>
 
-<p>
-  <b>Team admin:</b>
-  <%= @contest.team_admin_id %>
-</p>
+  <div id="image-wrapper">
+    <img src="<%= img_url %>" style="width:200px; height:200px;"></img>
+  </div>
 
-<p>
-  <b>Event:</b>
-  <%= @contest.event_id %>
-</p>
+  <div id="top-content" >
+    <div id="contest-title">
+      <span>
+        <%= @contest.title %>
+      </span>
+    </div>
+    <div id="contest-description">
+      <span>
+        <%= @contest.description %>
+      </span>
+    </div>
+  </div>
 
-<p>
-  <b>Description:</b>
-  <%= @contest.description %>
-</p>
+  <div class="progress progress-striped" id="time-wrapper">
+    <div class="bar" style="width: 0%;" id="timeleft"></div>
+  </div>
 
-<p>
-  <b>Title:</b>
-  <%= @contest.title %>
-</p>
+  <div id="contest-schemes">
+    <% @contest.schemes.each do |s| %>
+      <div class="contest-scheme">
+        <%= s.title %>
+      </div>
+    <% end %>
+  </div>
+<div>
 
-<p>
-  <b>Start time:</b>
-  <%= @contest.start_time %>
-</p>
+<script>
+  var start = new Date("<%= @contest.start_time %>");
+  var end = new Date("<%= @contest.end_time %>");
+  var total = end - start;
+  var now = new Date().getTime();
+  var passed = now-start;
 
-<p>
-  <b>End time:</b>
-  <%= @contest.end_time %>
-</p>
+  var width = (passed/total)*100.0;
 
+  if (width < 0) {
+    width = 0;
+  }
+  else if (width > 100) {
+    width = 100;
+  }
+
+  $("#timeleft").css("width", width + "%");
+</script>
