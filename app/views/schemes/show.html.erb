@@ -9,8 +9,6 @@
   });
 
 </script>
-
-
 <script type="text/javascript">
   // Initialize API key, session, and token...
   // Think of a session as a room, and a token as the key to get in to the room
@@ -144,11 +142,9 @@
   function exceptionHandler(event) {
     alert("Exception: " + event.code + "::" + event.message);
   }
-
   //--------------------------------------
   //  HELPER METHODS
   //--------------------------------------
-
   function addStream(stream) {
     // Check if this is the stream that I am publishing, and if so do not publish.
     if (stream.connection.connectionId == session.connection.connectionId) {
@@ -172,13 +168,24 @@
   }
 </script>
 
-<script>
+<script type="text/template" id="message-template">
+  <div style="width:300px; height:100px; background:grey">
+    <h3> [[= message ]] </h3>
+    <h4> By [[= user_name ]] </h4>
+  </div>
+</script>
 
-(function(){
-    addMessage=function(data){
-       $('#messages').append($('<div style="width:300px; height:100px; background:grey"><h3>' + data.message+ '</h3><h4>By' + data.user_name+ '</h4></div>').hide().fadeIn(2000));
-    };
-}());
+<script>
+$(document).ready(function(){
+  window.message_template = _.template($("#message-template").html());
+});
+  (function(){
+      addMessage=function(data){
+        $("#message").val("");
+        var new_message = $(message_template(data));
+        $('#messages').append(new_message);
+      };
+  }());
 
 $(document).ready(function(){
     <% if @current_user %>
@@ -225,9 +232,7 @@ $(document).ready(function(){
                 location.reload()
             }
         });
-
-    })
-
+    });
     $('#message-submit').click(function(){
         $.ajax({
             type: "POST",
@@ -247,98 +252,88 @@ $(document).ready(function(){
       })    
     <% end %>
 })
-
 </script>
 <% if @current_user && !@scheme.users.include?(@current_user) %>
-<% if !@already_have_loc %>
-<a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    Add To Your Watchlist!
-  </div>
-  <div class="modal-body">
-         Pick your location below by clicking on the map. Double click to change:
-        <div "temp-loc" > </div>
-
-        <div id="map3" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
-            <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
-        </div>
-         <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
-  </div>
-
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
-</div>
-
-<% else %>
-<a role="button" id = 'add-to-watch-already-exists-btn' class="btn"> Add To Your Watchlist</a>
-
-<% end%>
+  <% if !@already_have_loc %>
+    <a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        Add To Your Schemes!
+      </div>
+      <div class="modal-body">
+             Pick your location below by clicking on the map. Double click to change:
+            <div "temp-loc" > </div>
+            <div id="map3" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
+                <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
+            </div>
+             <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+  <% else %>
+    <a role="button" id = 'add-to-watch-already-exists-btn' class="btn">Join this Scheme</a>
+  <% end%>
 <% end %>
 
 <div class="modal clearfix" id="contest-select">
   </div>
-
-<% if @scheme.creator_id == @current_user.id.to_s %>
+<% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
   <div id="contest" class="btn">Add to Contest</div>
 <% end %>
 
 <p id="notice"><%= notice %></p>
 
-
-<p>
-  <b>Creator:</b>
-  <%= @scheme.creator_id %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @scheme.description %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @scheme.title %>
-</p>
-
-<h1> Users </h1>
-
-<% @scheme.users.each do |u| %>
-    <div style="width:300px; height:100px; background:grey" class ="user">
-      <h3><%= u.name %></h3>
-    </div>
-   
-<% end %>
-
-<h1> Contests </h1>
-<% @scheme.contests.each do |c| %>
-  <div style="width:300px; height:100px; background:grey" class ="user">
-    <h3><%= c.title %></h3>
-  </div>
-   
-<% end %>
-
-<h1> Messages </h1>
-<div id="messages">
-  <% @scheme.messages.each do |m| %>
-    <div style="width:300px; height:100px; background:grey">
-      <h3><%= m.content %></h3>
-      <h4>By <%= m.user.name %></h4>
-    </div>
-  <% end %>
+<div id="scheme-title" class="container">
+  <h1><%= @scheme.title %></h1>
 </div>
-   
+<div id="scheme-main-row-container">
+  <div id="scheme-main-row" class="clearfix">
+    <div id="scheme-image" class="pull-left">
+       <%= render :partial => "shared/scheme_icon", :locals => {:scheme => @scheme, :hover=> false } %>
+    </div>
+    <div id="scheme-users" class="pull-left">
+      <% if @scheme.users.count >0 %>
+        <% @scheme.users do |user| %>
+          <div class="scheme-user">
+            <%= user.name %>
+          </div>
+        <% end %>
+      <% else %>
+        There is nobody registered to this scheme. Be the first!
+      <% end %>
+    </div>
+    <div id="scheme-contests" class="pull-left">
+      <% if @scheme.contests.count > 0 %>
+        <% @scheme.contests do |content| %>
+          <div class="scheme-contest">
 
-
-<textarea id ="message" rows="10" cols="400">
-
-</textarea>
-<br />
-
+          </div>
+        <% end %>
+      <% else %>
+        This scheme is currently not entered in any contests. <br />
+        Use the message box below to ask the scheme creator to enter it
+        in a contest!
+      <% end %>
+    </div>
+  </div>
+</div>
+<textarea id ="message" rows="10" cols="400"></textarea>
 <button type="submit" id="message-submit" class="btn"> Submit!</button>
 
 
+  <div id="links">
+        <!-- <input type="button" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" />
+        <input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
+        <input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" /> -->
+  </div>
+
+  <div style="width:900px;height:300px;">
+    <div id="myCamera" class="publisherContainer" style="float:left;"></div>
+    <div id="subscribers" style=" margin-left:40px;float:left"></div>
+  </div>
+<!-- <div id="myPublisherDiv"></div> -->
 <script>
   $("#contest").click(function() {
     $("#contest-select").html(
@@ -365,23 +360,7 @@ $(document).ready(function(){
       })
     })
   })
-
 </script>
-
-<div id="links">
-        <!-- <input type="button" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" />
-        <input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
-        <input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" /> -->
-  </div>
-
-  <div style="width:900px;height:300px;">
-    <div id="myCamera" class="publisherContainer" style="float:left;"></div>
-    <div id="subscribers" style=" margin-left:40px;float:left"></div>
-
-  </div>
-<!-- <div id="myPublisherDiv"></div> -->
-     
-
 
 
 

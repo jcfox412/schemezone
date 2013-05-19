@@ -1,3 +1,24 @@
 // Place all the styles related to the Schemes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#scheme-main-row {
+	height: 200px;
+	margin: 0 auto;
+	display: inline-block;
+	margin-left: 5%;
+}
+
+#scheme-main-row-container {
+	text-align: center;
+	border-bottom: 1px solid #e8e8e8;
+	line-height: 29px;
+	font-size: 20px;
+}
+
+
+#scheme-users, #scheme-contests {
+	width: 400px;
+	height: 400px;
+	margin: 15px;
+}

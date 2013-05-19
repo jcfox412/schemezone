@@ -39,7 +39,7 @@
           <div id="index-schemes">
             <% Scheme.all.each do |scheme| %>
               <a href="<%= event_scheme_path(scheme.event, scheme) %>">
-               <%= render :partial => "shared/scheme_icon", :locals => {:scheme => scheme } %>
+                 <%= render :partial => "shared/scheme_icon", :locals => {:scheme => scheme, :hover=> true } %>
                </a>
             <% end %>
           </div>
