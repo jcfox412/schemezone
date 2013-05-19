@@ -74,7 +74,7 @@ class SchemesController < ApplicationController
 
     respond_to do |format|
       if @scheme.update_attributes(params[:scheme])
-        format.html { redirect_to @scheme, notice: 'Scheme was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Scheme was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
