@@ -1,4 +1,5 @@
 class Scheme < ActiveRecord::Base
+  DEFAULT_PHOTO = "/img/cheerleaders.jpg"
   attr_accessible :event_id, :creator_id, :description, :string, :title, :type, :team_name, :image_url
 
   belongs_to :event
@@ -10,6 +11,10 @@ class Scheme < ActiveRecord::Base
   # override method so messages are included in json
   def as_json(options={})
       super(:include =>[:messages,:users])
+  end
+
+  def image_url
+  	return DEFAULT_PHOTO
   end
   
 end

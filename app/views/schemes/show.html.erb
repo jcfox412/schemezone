@@ -159,8 +159,6 @@
             document.getElementById(id).style.display = 'none';
           }
         </script>
-
-
 <script>
 $(document).ready(function(){
     <% if @current_user %>
@@ -226,21 +224,12 @@ $(document).ready(function(){
                 location.reload()
             }
         });
-      })
-
-        
+      })    
     <% end %>
-  
 })
 
 </script>
-
 <% if @current_user && !@scheme.users.include?(@current_user) %>
-
-
-
-
-
 <% if !@already_have_loc %>
 <a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -248,20 +237,13 @@ $(document).ready(function(){
     Add To Your Watchlist!
   </div>
   <div class="modal-body">
-   
-
-  
-    
-
          Pick your location below by clicking on the map. Double click to change:
         <div "temp-loc" > </div>
 
         <div id="map3" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
             <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
         </div>
-         <button type="submit" id="add-scheme-btn" class="btn">Add!</button>
-
-    
+         <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
   </div>
 
   <div class="modal-footer">

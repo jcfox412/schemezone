@@ -11,7 +11,7 @@ $(document).ready(function(){
     });
     function addMyMarker() {
         <% if @my_loc %>
-        $('#map2').append('<image class="ping" src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>) +'px"/>');
+        $('#map2').append('<image src="/img/map_mine.png" style="height:20px;width:20px;position:absolute; left:' + ($('#map2').offset().left + <%= @my_loc.left %>) + 'px; top: ' + ($('#map2').offset().top + <%= @my_loc.top %>) +'px"/>');
         <% end %>
 
     }
@@ -49,7 +49,7 @@ $(document).ready(function(){
                     var u_id = users[j].id
                     for (var k = 0; k < locs.length; k++){
                         if (locs[k].user_id == u_id){
-                            $('#map2').append('<image src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
+                            $('#map2').append('<image class="ping" src="/img/map.png" style="width:12px; height:20px; position:absolute; left:' + ($('#map2').offset().left + locs[k].left) + 'px; top: ' + ($('#map2').offset().top + locs[k].top) +'px"/>')
                         }
                     }
                 }
@@ -141,6 +141,7 @@ $(document).ready(function(){
   <div>
     <div class="row clearfix" style="margin-right: -5px;">
       <div class="event-show-spacer"></div> 
+      <div class="pull-left space-vertical"></div>
       <div id="map2" class="pull-left">
       </div>
       <div id="schemes" class="pull-left">

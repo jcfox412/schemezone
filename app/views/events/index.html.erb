@@ -1,4 +1,4 @@
-<div id="bgcarousel" class="carousel slide">
+ <div id="bgcarousel" class="carousel slide">
   <div class="carousel-inner">
     <div class="active item" style="background-image: url(http://www.calstategames.org/images/Super%20Bowl.jpg)"></div>
     <div class="item" style="background-image: url(http://upload.wikimedia.org/wikipedia/commons/0/02/2009_MN_Boys_Hockey_State_Championship.jpg)"></div>
@@ -30,15 +30,17 @@
       </div>
 </section>
 <div id="main-container-container">
-  <div class="container" style="margin-left: 5%; margin-right: 5%">
+  <div class="container">
     <div id="main-container">
-      <div id="events-container" class="span12">
+      <div id="events-container">
       </div>
-        <div id="scheme-container" class="span12" style="margin-left: 0; padding-left: 0;">
+        <div id="scheme-container" class="span12 clearfix" style="margin-left: 0; padding-left: 0;">
           <h4>Upcoming Schemes</h4>
           <div id="index-schemes">
             <% Scheme.all.each do |scheme| %>
+              <a href="<%= event_scheme_path(scheme.event, scheme) %>">
                <%= render :partial => "shared/scheme_icon", :locals => {:scheme => scheme } %>
+               </a>
             <% end %>
           </div>
         </div>
