@@ -77,7 +77,7 @@
 	}
 }
 
-#submit, #create-scheme-btn
+#submit, #create-scheme-btn, .special-input
 {		
 	background: #006bbb;
 	background-image: -moz-linear-gradient(#0088d7, #006bbb);
@@ -104,13 +104,13 @@
 	
 	text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 }
-#submit:hover, #create-scheme-btn:hover
+#submit:hover, #create-scheme-btn:hover, .special-input:hover
 {		
 	background: #0088d7;
 	background-image: -moz-linear-gradient(#006bbb, #0088d7);
 	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #0088d7),color-stop(1, #006bbb));
 }	
-#submit:active, #create-scheme-btn:active
+#submit:active, #create-scheme-btn:active, .special-input:active
 {		
 	background: #0088d7;
 	outline: none;
@@ -120,7 +120,7 @@
 	 box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;		
 }
 
-#submit::-moz-focus-inner, #create-scheme-btn::-moz-focus-innter
+#submit::-moz-focus-inner, #create-scheme-btn::-moz-focus-innter, #vide-chat::moz-focus-innter
 {
        border: 0;  /* Small centering fix for Firefox */
 }		
@@ -136,7 +136,7 @@
    color: #9c9c9c;
    font-style: italic;
 } 
-#create-scheme-btn {
+#create-scheme-btn, .special-input{
 	text-align: center;
 	border-radius: 3px;
 	font-size: 12px;
@@ -147,7 +147,7 @@
 	width: 120px;
 	text-shadow: 1px 1px  5px #000000;
 }
-#create-scheme-btn:hover {
+#create-scheme-btn:hover, .special-input:hover {
 	text-align: center;
 	border-radius: 3px;
 	font-size: 12px;
@@ -180,9 +180,9 @@
 	background-size: 200px 147px;
 	width: 200px;
 	height: 147px;
-	-webkit-box-shadow: 0px 0px 1px 1px white inset, 0px 23px 21px -33px #000;
-	-moz-box-shadow: 0px 0px 1px 1px white inset, 0px 23px 21px -33px #000;
-	box-shadow: 0px 0px 1px 1px white inset, 0px 23px 21px -33px #000;
+	 -moz-box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.5);
+	 -webkit-box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.5);
+	 box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.5);		
 	background-repeat: no-repeat;
 	margin: 5px;
 	float: left;
@@ -361,6 +361,7 @@ html {
 #super-show-wrapper {
 	background-color: #324523;
 }
+
 #show-wrapper {
 	overflow: hidden;
 	margin: 0px auto;

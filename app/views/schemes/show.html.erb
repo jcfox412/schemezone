@@ -52,16 +52,9 @@
   to allow the page from communicating with SWF content loaded from the web. For more information,
   see http://www.tokbox.com/opentok/docs/js//tutorials/helloworld.html#localTest
   */
-  connect();
+  
   function connect() {
     session.connect(apiKey, token);
-  }
-
-  function disconnect() {
-    // session.disconnect();
-    // hide('disconnectLink');
-    // hide('publishLink');
-    // hide('unpublishLink');
   }
 
   // Called when user wants to start publishing to the session
@@ -241,7 +234,7 @@ $(document).ready(function(){
                 message:{
                     scheme_id: <%= @scheme.id %>,
                     user_id: <%= @current_user.id %>,
-                    content: $('#message').val()
+                    content: $('#message-text-box').val()
                 }
             },
             dataType: "json",
@@ -249,6 +242,12 @@ $(document).ready(function(){
                 //location.reload()
             }
         });
+      })
+
+      $('#video-chat').click(function(){
+        $('#video-views').fadeIn()
+        connect()
+
       })    
     <% end %>
 })
@@ -279,36 +278,40 @@ $(document).ready(function(){
 
 <div class="modal clearfix" id="contest-select">
   </div>
-<% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
-  <div id="contest" class="btn">Add to Contest</div>
-<% end %>
 
 <p id="notice"><%= notice %></p>
 
-<div id="scheme-title" class="container">
-  <h1><%= @scheme.title %></h1>
+<div id="scheme-title" class="container" style="margin-bottom: 20px; text-align: center;">
+  <hr>
+  <h1 style="display: inline-block;"><%= @scheme.title %></h1>
+  <% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
+    <span id="contest" style="display: inline-block; margin: -20px 0 0 20px;" class="btn">Register Scheme for a Contest</span >
+  <% end %>
+  <hr>
 </div>
-<div id="scheme-main-row-container">
-  <div id="scheme-main-row" class="clearfix">
+<div id="scheme-main-row-container" class="center">
+  <div id="scheme-main-row" class="clearfix center">
     <div id="scheme-image" class="pull-left">
        <%= render :partial => "shared/scheme_icon", :locals => {:scheme => @scheme, :hover=> false } %>
     </div>
     <div id="scheme-users" class="pull-left">
-      <% if @scheme.users.count >0 %>
-        <% @scheme.users do |user| %>
-          <div class="scheme-user">
-            <%= user.name %>
-          </div>
-        <% end %>
-      <% else %>
-        There is nobody registered to this scheme. Be the first!
+      <div id="scheme-users-title" class="scheme-section-title">
+        <h3 style="margin-top: -10px">Users Scheming</h3>
+      </div>
+      <ul>
+          <li><%= @scheme.creator.name %></li>
+      <% @scheme.users do |user| %>
+          <li><%= user.name %></li>
       <% end %>
+      </ul>
     </div>
     <div id="scheme-contests" class="pull-left">
+      <div id="scheme-users-title" class="scheme-section-title">
+        <h3 style="margin-top: -10px">Registered Contests</h3>
+      </div>
       <% if @scheme.contests.count > 0 %>
         <% @scheme.contests do |content| %>
           <div class="scheme-contest">
-
           </div>
         <% end %>
       <% else %>
@@ -319,21 +322,96 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-<textarea id ="message" rows="10" cols="400"></textarea>
-<button type="submit" id="message-submit" class="btn"> Submit!</button>
-
-
-  <div id="links">
-        <!-- <input type="button" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" />
-        <input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
-        <input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" /> -->
+<div style="height: 20px"></div>
+<div class="center">
+  <input style="display: block" id="video-chat"  class="video-button special-input center" type="submit" value="Video Chat">
+  <div style="width:900px;height:300px; display: none;" id="video-views">
+    <div style="width:600px; margin: 0 auto">
+      <div id="myCamera" class="publisherContainer" style="float:left;"></div>
+      <div id="subscribers" style=" margin-left:40px;float:left"></div>
+    </div>
   </div>
-
-  <div style="width:900px;height:300px;">
-    <div id="myCamera" class="publisherContainer" style="float:left;"></div>
-    <div id="subscribers" style=" margin-left:40px;float:left"></div>
+</div>
+<hr>
+<div style="width: 100%;">
+  <div id="messages">
+    <h1> Messages </h1>
+  <div id="messages">
+    <% @scheme.messages.each do |m| %>
+      <div style="width:300px; height:100px; background:grey">
+        <h3><%= m.content %></h3>
+        <h4>By <%= m.user.name %></h4>
+      </div>
+    <% end %>
   </div>
-<!-- <div id="myPublisherDiv"></div> -->
+  </div>
+  <div class="center" >
+    <textarea id ="message-text-box" class="center" resizeable="false"></textarea>
+    <input   class="center  special-input" type="submit" id="message-submit" class="btn" />
+  </div>
+</div>
+
+
+
+<div id="fb-root"></div>
+<button id="fb-btn" class="btn">Post to FB!</button>
+
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '530419823666957',                        // App ID from the app dashboard
+      // channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+
+
+    $(document).ready(function(){
+
+        $('#fb-btn').click(function(){
+             FB.ui(
+          {
+           method: 'feed',
+           name: 'Join my Scheme!',
+           caption: 'BODY PAINTING AT FOOTBALL GAME',
+           description: (
+              "Hey guys, let's organize a scheme to do body painting at tomorrow's game :D. "
+           ),
+           link: 'http://localhost:3000/events/<%= @event.id %>/schemes/<%= @scheme.id %>',
+           picture: 'http://www.collegecharlie.com/sanford-stadium.jpg'
+          },
+          function(response) {
+            if (response && response.post_id) {
+              console.log('Post was published.');
+            } else {
+              console.log('Post was not published.');
+            }
+          }
+        );
+
+        })
+       
+
+    })
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
 <script>
   $("#contest").click(function() {
     $("#contest-select").html(

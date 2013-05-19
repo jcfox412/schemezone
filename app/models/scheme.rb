@@ -13,6 +13,10 @@ class Scheme < ActiveRecord::Base
       super(:include =>[:messages,:users])
   end
 
+  def creator
+    User.find_by_id(creator_id)
+  end
+
   def image_url
   	return DEFAULT_PHOTO
   end
