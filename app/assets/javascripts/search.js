@@ -10,7 +10,7 @@ function search(name, loc, callback, last){
             where: loc,
             what: name,
             format : "json",
-            cat: "9",
+            cat: "51,52,56,58,1102,60,1094,76",
         }
     }
     $.ajax({
