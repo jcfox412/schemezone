@@ -20,7 +20,7 @@ class ContestsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @event.contest }
+      # format.json { render json: @event.contest }
     end
   end
 
@@ -51,7 +51,7 @@ class ContestsController < ApplicationController
 
   protected
   def get_event
-    @event =  Event.find_by_stubhub_eventId(params[:event_id])
+    @event =  Event.find_by_id(params[:event_id])
   end
 
 end
