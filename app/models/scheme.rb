@@ -1,5 +1,5 @@
 class Scheme < ActiveRecord::Base
-  DEFAULT_PHOTO = "/img/cheerleaders.jpg"
+  DEFAULT_PHOTO = "/img/stadium.jpeg"
   attr_accessible :event_id, :creator_id, :description, :string, :title, :type, :team_name, :image_url, :is_endorsed
 
   belongs_to :event

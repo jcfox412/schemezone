@@ -161,11 +161,12 @@
   }
 </script>
 
+
 <script type="text/template" id="message-template">
   <div class="event-show-message center">
     <div class="e-message"> [[= message ]] </div>
-    <div class="e-username"> By [[= user_name ]] </div>
-    <div class="e-timestamp"> [[= created_at ]] </div>
+    <span class="e-center"> [[= user_name ]]  on </span>
+    <span class="e-timestamp e-center">[[= pretty_date(created_at) ]]</span>
   </div>
 </script>
 
@@ -337,22 +338,19 @@ $(document).ready(function(){
 <div style="width: 100%;">
   <div class="center" >
     <textarea id ="message-text-box" class="center" resizeable="false"></textarea>
-    <input   class="center  special-input" type="submit" id="message-submit" class="btn" />
+    <input class="center  special-input" type="submit" id="message-submit" class="btn" />
+    <input class="center special-input" id="fb-btn" type="submis" class="btn"value="Post to FB!"/>
+  </div>
+  <div class="center">
+    <h2 id="messages-section-title">Messages</h2>
     <div id="messages">
-
       <% @scheme.messages.each do |m| %>
       <div class="event-show-message center">
         <div class="e-message"><%= m.content %></div>
-        <div class="e-username"> By <%= m.user.name %> </div>
-        <span class="e-time"> <%= m.created_at %> </span>
+        <span class="e-center"><%= m.user.name %> on </span>
+        <span class="e-timestamp e-center"> <%= m.created_at %> </span>
       </div>
-    <% end %>
-
-      
-    </div>
-
-
-    </div>
+      <% end %> 
     </div>
   </div>
 </div>
@@ -360,9 +358,9 @@ $(document).ready(function(){
 
 
 <div id="fb-root"></div>
-<button id="fb-btn" class="btn">Post to FB!</button>
 
 <script>
+  $(".e-timestamp").html(pretty_date($(".e-timestamp").html()));
   window.fbAsyncInit = function() {
     // init the FB JS SDK
     FB.init({
@@ -374,25 +372,28 @@ $(document).ready(function(){
     // Additional initialization code such as adding Event Listeners goes here
 
     $('#fb-btn').click(function(){
-             FB.ui(
-          {
-           method: 'feed',
-           name: 'Join my Scheme!',
-           caption: 'BODY PAINTING AT FOOTBALL GAME',
-           description: (
-              "Hey guys, let's organize a scheme to do body painting at tomorrow's game :D. "
-           ),
-           link: 'http://localhost:3000/events/<%= @event.id %>/schemes/<%= @scheme.id %>',
-           picture: 'http://s3.evcdn.com/images/block/I0-001/003/983/658-3.jpeg_/reliant-stadium-58.jpeg'
-          },
-          function(response) {
-            if (response && response.post_id) {
-              console.log('Post was published.');
-            } else {
-              console.log('Post was not published.');
-            }
-          }
-        );
+
+        // FB.ui(
+        //   {
+        //    method: 'feed',
+        //    name: 'Join my Scheme!',
+        //    caption: 'BODY PAINTING AT FOOTBALL GAME',
+        //    description: (
+        //       "Hey guys, let's organize a scheme to do body painting at tomorrow's game :D. "
+        //    ),
+        //    link: 'http://localhost:3000/events/<%= @event.id %>/schemes/<%= @scheme.id %>',
+        //    picture: 'http://s3.evcdn.com/images/block/I0-001/003/983/658-3.jpeg_/reliant-stadium-58.jpeg'
+        //   },
+        //   function(response) {
+        //     if (response && response.post_id) {
+        //       console.log('Post was published.');
+        //     } else {
+        //       console.log('Post was not published.');
+        //     }
+        //   }
+        // );
+    window.location = "http://www.facebook.com/dialog/feed?app_id=530419823666957&link=http://localhost:3000/events/<%= @event.id %>/schemes/<%= @scheme.id %>&picture=http://s3.evcdn.com/images/block/I0-001/003/983/658-3.jpeg_/reliant-stadium-58.jpeg&name=Join my Scheme!&caption=BODY PAINTING AT FOOTBALL GAME&description=Hey guys, let's organize a scheme to do body painting at tomorrow's game :D.&redirect_uri=http://localhost:3000/events/<%= @event.id %>/schemes/<%= @scheme.id %>";
+      
 
       });
 
