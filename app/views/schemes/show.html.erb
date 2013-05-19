@@ -163,8 +163,9 @@
 
 <script type="text/template" id="message-template">
   <div class="event-show-message center">
-    <div class="e-message"> [[= content ]] </div>
+    <div class="e-message"> [[= message ]] </div>
     <div class="e-username"> By [[= user_name ]] </div>
+    <div class="e-timestamp"> [[= create_at ]] </div>
   </div>
 </script>
 
@@ -174,7 +175,7 @@ $(document).ready(function(){
 });
   (function(){
       addMessage=function(data){
-        $("#messages").prepend('<div class="event-show-message center"><div class="e-message">' + data.message+ ' </div><div class="e-username"> By ' + data.user_name + ' </div><span class="e-time"> ' + data.created_at + ' </span></div>');
+        $("#messages").prepend(message_template(data));
         // var new_message = $(message_template(data));
         // $('#messages').prepend(new_message);
 
