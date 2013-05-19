@@ -257,30 +257,7 @@ $(document).ready(function(){
     <% end %>
 })
 </script>
-<% if @current_user && !@scheme.users.include?(@current_user) %>
-  <% if !@already_have_loc %>
-    <a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        Add To Your Schemes!
-      </div>
-      <div class="modal-body">
-             Pick your location below by clicking on the map. Double click to change:
-            <div "temp-loc" > </div>
-             <div id="map3">
-                <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
-            </div>
 
-             <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-    </div>
-  <% else %>
-    <a role="button" id = 'add-to-watch-already-exists-btn' class="btn">Join this Scheme</a>
-  <% end%>
-<% end %>
 
 <div class="modal clearfix" id="contest-select">
   </div>
@@ -292,12 +269,45 @@ $(document).ready(function(){
   <% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
     <span id="contest" style="display: inline-block; margin: -20px 0 0 20px;" class="btn">Register Scheme for a Contest</span >
   <% end %>
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              Add To Your Schemes!
+            </div>
+            <div class="modal-body">
+                   Pick your location below by clicking on the map. Double click to change:
+                  <div "temp-loc" > </div>
+                   <div id="map3">
+                      <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
+                  </div>
+                  <br />
+                   <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+          </div>
+
+
   <hr>
 </div>
 <div id="scheme-main-row-container" class="center">
   <div id="scheme-main-row" class="clearfix center">
     <div id="scheme-image" class="pull-left">
        <%= render :partial => "shared/scheme_icon", :locals => {:scheme => @scheme, :hover=> false } %>
+      
+       <br />
+       <% if @current_user && !@scheme.users.include?(@current_user) %>
+        <% if !@already_have_loc %>
+          <a href="#myModal" role="button" class="btn special-input" data-toggle="modal"> Participate in this Scheme!</a>
+        <% else %>
+          <a role="button" id = 'add-to-watch-already-exists-btn' class="btn">Join this Scheme</a>
+        <% end%>
+      <% end %>
+
+
+
     </div>
     <div id="scheme-users" class="pull-left">
       <div id="scheme-users-title" class="scheme-section-title">
