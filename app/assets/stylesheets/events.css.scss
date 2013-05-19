@@ -69,8 +69,13 @@
 #scheme-section-title {
 	text-align: center;
 	margin: 0 auto;
-	width: 100%;
+	margin-left: 0px;
+	width: 487px;
 	h3 {
+		background-color: #7d8b8b;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		width: 487	px;
 		text-align: center;
 		padding: 0;
 		margin: 0;
@@ -282,8 +287,7 @@ html {
 	cursor: pointer;
 	border-radius: 5px;
 	&:hover {
-		background-color: #005076;
-		color: #fff;
+		background-color: #e8e8e8;
 	}
 }
 #map2 .ping {
@@ -311,7 +315,7 @@ html {
 	text-align: -webkit-match-parent;
 	line-height: 18px;
 	margin-bottom: 5px;
-	border-radius: 0px;
+	border-radius: 3px;
 	h3 {
 		margin: 0px;
 		padding: 0px;
@@ -335,13 +339,15 @@ html {
 	line-height: 18px;
 	color: #fff;
 	text-align: center;
-	background-color: rgba(16, 67, 104, .8)	;
+	background-color: #7d8b8b;
 	text-shadow: 2px 2px  5px #000000;
+
 }
 #event-show-info {
 	height: 30px;
-	color: #fff;
-	background-color: rgba(35, 125, 186, .8);
+	font-size: 13px;
+  color: #3f474c;
+	background-color: #e8e8e8;
 	margin-top: -1px;
 	text-align: center;
 	margin-left: auto;

@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
       Pusher.key = 'a86e492369573711f1ac'
       Pusher.secret = '83e9412818b7d7b2e60f'
 
-      data = {'user_name' => @current_user.name, 'message' =>  @message.content}
+      data = {'user_name' => @current_user.name, 'message' =>  @message.content, 'created_at' => @message.created_at}
       Pusher['page-' + @scheme.id.to_s].trigger('notification', data)
 
 
