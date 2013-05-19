@@ -429,20 +429,26 @@ $(document).ready(function(){
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-
-
-
-
+<script type="text/template" id="contest-template">
+ <h3 class="modal-header">Pick contests to enter</h3>
+  <div class="modal-body">
+  <% @event.contests.each_with_index do |c, i| %>
+    <div class="contest clearfix" style="background-color: <%= i.modulo(2)==0 ? '#e8e8e8;' : '#fff;' %> padding: 2px 5px; border-radius: 5px;">
+      <div class="pull-left">
+        <div><%= c.title %></div>
+        <div><%= c.description %></div>
+      </div>
+      <div class="btn contest-apply pull-right" style="margin-top:5px" id="contest-<%= c.id %>">Enter
+      </div>
+    </div>
+  <% end %>
+  </div>
+</script>
 <script>
+  contest_template = _.template($("#contest-template").html());
   $("#contest").click(function() {
     $("#contest-select").html(
-      ' <h3 class="modal-header">Pick a contest to enter</h3>' +
-        '<div class="modal-body">' +
-    '<% @event.contests.each do |c| %>' +
-      '<p><%= c.title %></p>' +
-      '<div class="btn contest-apply" id="contest-<%= c.id %>">Apply</div>' +
-    '<% end %> ' +
-  '</div>'
+      contest_template({})
     ).modal();
     $(".contest-apply").click(function() {
       contest_id = this.id.split("-")[1];
@@ -454,7 +460,7 @@ $(document).ready(function(){
           contest_id: contest_id
         },
         success: function() {
-          location.reload();
+          
         }
       })
     })
