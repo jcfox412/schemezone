@@ -1,167 +1,186 @@
 <script src='https://swww.tokbox.com/webrtc/v2.0/js/TB.min.js'></script>
+
+<link href="/assets/realtime-notifications/src/lib/gritter/css/jquery.gritter.css"rel="stylesheet" type="text/css" />
+<script>
+  $(function() {
+    var pusher = new Pusher('a86e492369573711f1ac');
+    var channel = pusher.subscribe('page-<%=@scheme.id%>');
+    var notifier = new PusherNotifier(channel);
+  });
+
+</script>
+
+
 <script type="text/javascript">
-          // Initialize API key, session, and token...
-          // Think of a session as a room, and a token as the key to get in to the room
-          // Sessions and tokens are generated on your server and passed down to the client
-          var apiKey = "16342281";
-          var sessionId = "2_MX4xNjM0MjI4MX4xMjcuMC4wLjF-U2F0IE1heSAxOCAxODowNDozMCBQRFQgMjAxM34wLjY2Mjg1NH4";
-          var token = "T1==cGFydG5lcl9pZD0xNjM0MjI4MSZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz04YzIzZDI3YzNiODk3NzVkNjI4NTllNjllYWRlNDYzYWNkMGFhY2QxOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9Ml9NWDR4TmpNME1qSTRNWDR4TWpjdU1DNHdMakYtVTJGMElFMWhlU0F4T0NBeE9Eb3dORG96TUNCUVJGUWdNakF4TTM0d0xqWTJNamcxTkg0JmNyZWF0ZV90aW1lPTEzNjg5MjU0NzQmbm9uY2U9MC4zOTE2Mjg5NzE0NjM2NDc2JmV4cGlyZV90aW1lPTEzNjk1MzAyNzgmY29ubmVjdGlvbl9kYXRhPQ==";
-          
-          var session;
-          var publisher;
-          var subscribers = {};
-          var VIDEO_WIDTH = 280;
-          var VIDEO_HEIGHT = 210;
+  // Initialize API key, session, and token...
+  // Think of a session as a room, and a token as the key to get in to the room
+  // Sessions and tokens are generated on your server and passed down to the client
+  var apiKey = "16342281";
+  var sessionId = "2_MX4xNjM0MjI4MX4xMjcuMC4wLjF-U2F0IE1heSAxOCAxODowNDozMCBQRFQgMjAxM34wLjY2Mjg1NH4";
+  var token = "T1==cGFydG5lcl9pZD0xNjM0MjI4MSZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz04YzIzZDI3YzNiODk3NzVkNjI4NTllNjllYWRlNDYzYWNkMGFhY2QxOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9Ml9NWDR4TmpNME1qSTRNWDR4TWpjdU1DNHdMakYtVTJGMElFMWhlU0F4T0NBeE9Eb3dORG96TUNCUVJGUWdNakF4TTM0d0xqWTJNamcxTkg0JmNyZWF0ZV90aW1lPTEzNjg5MjU0NzQmbm9uY2U9MC4zOTE2Mjg5NzE0NjM2NDc2JmV4cGlyZV90aW1lPTEzNjk1MzAyNzgmY29ubmVjdGlvbl9kYXRhPQ==";
+  
+  var session;
+  var publisher;
+  var subscribers = {};
+  var VIDEO_WIDTH = 280;
+  var VIDEO_HEIGHT = 210;
 
-          TB.addEventListener("exception", exceptionHandler);
-          
-          // Un-comment the following to set automatic logging:
-          // TB.setLogLevel(TB.DEBUG);
+  TB.addEventListener("exception", exceptionHandler);
+  
+  // Un-comment the following to set automatic logging:
+  // TB.setLogLevel(TB.DEBUG);
 
-          if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
-            alert("You don't have the minimum requirements to run this application."
-                + "Please upgrade to the latest version of Flash.");
-          } else {
-            session = TB.initSession(sessionId);  // Initialize session
+  if (TB.checkSystemRequirements() != TB.HAS_REQUIREMENTS) {
+    alert("You don't have the minimum requirements to run this application."
+        + "Please upgrade to the latest version of Flash.");
+  } else {
+    session = TB.initSession(sessionId);  // Initialize session
 
-            // Add event listeners to the session
-            session.addEventListener('sessionConnected', sessionConnectedHandler);
-            session.addEventListener('sessionDisconnected', sessionDisconnectedHandler);
-            session.addEventListener('connectionCreated', connectionCreatedHandler);
-            session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
-            session.addEventListener('streamCreated', streamCreatedHandler);
-            session.addEventListener('streamDestroyed', streamDestroyedHandler);
-          }
+    // Add event listeners to the session
+    session.addEventListener('sessionConnected', sessionConnectedHandler);
+    session.addEventListener('sessionDisconnected', sessionDisconnectedHandler);
+    session.addEventListener('connectionCreated', connectionCreatedHandler);
+    session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
+    session.addEventListener('streamCreated', streamCreatedHandler);
+    session.addEventListener('streamDestroyed', streamDestroyedHandler);
+  }
 
-          //--------------------------------------
-          //  LINK CLICK HANDLERS
-          //--------------------------------------
+  //--------------------------------------
+  //  LINK CLICK HANDLERS
+  //--------------------------------------
 
-          /*
-          If testing the app from the desktop, be sure to check the Flash Player Global Security setting
-          to allow the page from communicating with SWF content loaded from the web. For more information,
-          see http://www.tokbox.com/opentok/docs/js//tutorials/helloworld.html#localTest
-          */
-          connect();
-          function connect() {
-            session.connect(apiKey, token);
-          }
+  /*
+  If testing the app from the desktop, be sure to check the Flash Player Global Security setting
+  to allow the page from communicating with SWF content loaded from the web. For more information,
+  see http://www.tokbox.com/opentok/docs/js//tutorials/helloworld.html#localTest
+  */
+  connect();
+  function connect() {
+    session.connect(apiKey, token);
+  }
 
-          function disconnect() {
-            // session.disconnect();
-            // hide('disconnectLink');
-            // hide('publishLink');
-            // hide('unpublishLink');
-          }
+  function disconnect() {
+    // session.disconnect();
+    // hide('disconnectLink');
+    // hide('publishLink');
+    // hide('unpublishLink');
+  }
 
-          // Called when user wants to start publishing to the session
-          function startPublishing() {
-            if (!publisher) {
-              var parentDiv = document.getElementById("myCamera");
-              var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
-              publisherDiv.setAttribute('id', 'opentok_publisher');
-              parentDiv.appendChild(publisherDiv);
-              var publisherProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
-              publisher = TB.initPublisher(apiKey, publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
-              session.publish(publisher);
-              // show('unpublishLink');
-              // hide('publishLink');
-            }
-          }
+  // Called when user wants to start publishing to the session
+  function startPublishing() {
+    if (!publisher) {
+      var parentDiv = document.getElementById("myCamera");
+      var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
+      publisherDiv.setAttribute('id', 'opentok_publisher');
+      parentDiv.appendChild(publisherDiv);
+      var publisherProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
+      publisher = TB.initPublisher(apiKey, publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
+      session.publish(publisher);
+      // show('unpublishLink');
+      // hide('publishLink');
+    }
+  }
 
-          function stopPublishing() {
-            if (publisher) {
-              session.unpublish(publisher);
-            }
-            publisher = null;
+  function stopPublishing() {
+    if (publisher) {
+      session.unpublish(publisher);
+    }
+    publisher = null;
 
-            // show('publishLink');
-            // hide('unpublishLink');
-          }
+    // show('publishLink');
+    // hide('unpublishLink');
+  }
 
-          //--------------------------------------
-          //  OPENTOK EVENT HANDLERS
-          //--------------------------------------
+  //--------------------------------------
+  //  OPENTOK EVENT HANDLERS
+  //--------------------------------------
 
-          function sessionConnectedHandler(event) {
-            // Subscribe to all streams currently in the Session
-            for (var i = 0; i < event.streams.length; i++) {
-              addStream(event.streams[i]);
-            }
+  function sessionConnectedHandler(event) {
+    // Subscribe to all streams currently in the Session
+    for (var i = 0; i < event.streams.length; i++) {
+      addStream(event.streams[i]);
+    }
 
-            startPublishing();
-            // show('disconnectLink');
-            // show('publishLink');
-            // hide('connectLink');
-          }
+    startPublishing();
+    // show('disconnectLink');
+    // show('publishLink');
+    // hide('connectLink');
+  }
 
-          function streamCreatedHandler(event) {
-            // Subscribe to the newly created streams
-            for (var i = 0; i < event.streams.length; i++) {
-              addStream(event.streams[i]);
-            }
-          }
+  function streamCreatedHandler(event) {
+    // Subscribe to the newly created streams
+    for (var i = 0; i < event.streams.length; i++) {
+      addStream(event.streams[i]);
+    }
+  }
 
-          function streamDestroyedHandler(event) {
-            // This signals that a stream was destroyed. Any Subscribers will automatically be removed.
-            // This default behaviour can be prevented using event.preventDefault()
-          }
+  function streamDestroyedHandler(event) {
+    // This signals that a stream was destroyed. Any Subscribers will automatically be removed.
+    // This default behaviour can be prevented using event.preventDefault()
+  }
 
-          function sessionDisconnectedHandler(event) {
-            // This signals that the user was disconnected from the Session. Any subscribers and publishers
-            // will automatically be removed. This default behaviour can be prevented using event.preventDefault()
-            publisher = null;
+  function sessionDisconnectedHandler(event) {
+    // This signals that the user was disconnected from the Session. Any subscribers and publishers
+    // will automatically be removed. This default behaviour can be prevented using event.preventDefault()
+    publisher = null;
 
-            // show('connectLink');
-            // hide('disconnectLink');
-            // hide('publishLink');
-            // hide('unpublishLink');
-          }
+    // show('connectLink');
+    // hide('disconnectLink');
+    // hide('publishLink');
+    // hide('unpublishLink');
+  }
 
-          function connectionDestroyedHandler(event) {
-            // This signals that connections were destroyed
-          }
+  function connectionDestroyedHandler(event) {
+    // This signals that connections were destroyed
+  }
 
-          function connectionCreatedHandler(event) {
-            // This signals new connections have been created.
-          }
+  function connectionCreatedHandler(event) {
+    // This signals new connections have been created.
+  }
 
-          /*
-          If you un-comment the call to TB.setLogLevel(), above, OpenTok automatically displays exception event messages.
-          */
-          function exceptionHandler(event) {
-            alert("Exception: " + event.code + "::" + event.message);
-          }
+  /*
+  If you un-comment the call to TB.setLogLevel(), above, OpenTok automatically displays exception event messages.
+  */
+  function exceptionHandler(event) {
+    alert("Exception: " + event.code + "::" + event.message);
+  }
 
-          //--------------------------------------
-          //  HELPER METHODS
-          //--------------------------------------
+  //--------------------------------------
+  //  HELPER METHODS
+  //--------------------------------------
 
-          function addStream(stream) {
-            // Check if this is the stream that I am publishing, and if so do not publish.
-            if (stream.connection.connectionId == session.connection.connectionId) {
-              return;
-            }
-            var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
-            subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
+  function addStream(stream) {
+    // Check if this is the stream that I am publishing, and if so do not publish.
+    if (stream.connection.connectionId == session.connection.connectionId) {
+      return;
+    }
+    var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
+    subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
 
-            subscriberDiv.setAttribute('style', 'float:left'); 
-            document.getElementById("subscribers").appendChild(subscriberDiv);
-            var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
-            subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
-          }
+    subscriberDiv.setAttribute('style', 'float:left'); 
+    document.getElementById("subscribers").appendChild(subscriberDiv);
+    var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
+    subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
+  }
 
-          function show(id) {
-            document.getElementById(id).style.display = 'block';
-          }
+  function show(id) {
+    document.getElementById(id).style.display = 'block';
+  }
 
-          function hide(id) {
-            document.getElementById(id).style.display = 'none';
-          }
-        </script>
+  function hide(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+</script>
 
 
 <script>
+
+(function(){
+    addMessage=function(data){
+       $('#messages').append($('<div style="width:300px; height:100px; background:grey"><h3>' + data.message+ '</h3><h4>By' + data.user_name+ '</h4></div>').hide().fadeIn(2000));
+    };
+}());
+
 $(document).ready(function(){
     <% if @current_user %>
     var posX = ""
@@ -223,7 +242,7 @@ $(document).ready(function(){
             },
             dataType: "json",
             success: function(data){
-                location.reload()
+                //location.reload()
             }
         });
       })
@@ -318,13 +337,16 @@ $(document).ready(function(){
 <% end %>
 
 <h1> Messages </h1>
-<% @scheme.messages.each do |m| %>
+<div id="messages">
+  <% @scheme.messages.each do |m| %>
     <div style="width:300px; height:100px; background:grey">
       <h3><%= m.content %></h3>
       <h4>By <%= m.user.name %></h4>
     </div>
+  <% end %>
+</div>
    
-<% end %>
+
 
 <textarea id ="message" rows="10" cols="400">
 
