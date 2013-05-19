@@ -162,9 +162,9 @@
 </script>
 
 <script type="text/template" id="message-template">
-  <div style="width:300px; height:100px; background:grey">
-    <h3> [[= message ]] </h3>
-    <h4> By [[= user_name ]] </h4>
+  <div class="event-show-message center">
+    <div class="e-message"> [[= content ]] </div>
+    <div class="e-username"> By [[= user_name ]] </div>
   </div>
 </script>
 
@@ -176,7 +176,7 @@ $(document).ready(function(){
       addMessage=function(data){
         $("#message").val("");
         var new_message = $(message_template(data));
-        $('#messages').append(new_message);
+        $('#messages').prepend(new_message);
       };
   }());
 
@@ -334,20 +334,12 @@ $(document).ready(function(){
 </div>
 <hr>
 <div style="width: 100%;">
-  <div id="messages">
-    <h1> Messages </h1>
-  <div id="messages">
-    <% @scheme.messages.each do |m| %>
-      <div style="width:300px; height:100px; background:grey">
-        <h3><%= m.content %></h3>
-        <h4>By <%= m.user.name %></h4>
-      </div>
-    <% end %>
-  </div>
-  </div>
   <div class="center" >
     <textarea id ="message-text-box" class="center" resizeable="false"></textarea>
     <input   class="center  special-input" type="submit" id="message-submit" class="btn" />
+    <div id="messages">
+    </div>
+    </div>
   </div>
 </div>
 
@@ -365,14 +357,11 @@ $(document).ready(function(){
       status     : true,                                 // Check Facebook Login status
       xfbml      : true                                  // Look for social plugins on the page
     });
-
-
     // Additional initialization code such as adding Event Listeners goes here
   };
 
 
     $(document).ready(function(){
-
         $('#fb-btn').click(function(){
              FB.ui(
           {
@@ -437,7 +426,14 @@ $(document).ready(function(){
         }
       })
     })
-  })
+  });
+  $(document).ready(function(){
+    var messages_list = <%=raw @scheme.messages.to_json %>
+    _.each(messages_list, function(m){
+      console.log(m);
+      $("#messages").prepend(window.message_template(m));
+    });
+  });
 </script>
 
 
