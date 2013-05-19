@@ -38,7 +38,7 @@
           <h4>Upcoming Schemes</h4>
           <div id="index-schemes">
             <% Scheme.all.each do |scheme| %>
-               <%= render :partial => "scheme_icon", :locals => {: => message } %>
+               <%= render :partial => "shared/scheme_icon", :locals => {:scheme => scheme } %>
             <% end %>
           </div>
         </div>
