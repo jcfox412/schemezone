@@ -26,6 +26,7 @@
           </div>
       </div>
 </section>
+<div id="main-container-container">
   <div class="container" style="margin-left: 5%; margin-right: 5%">
     <div id="main-container">
       <div id="events-container" class="span12">
@@ -33,12 +34,16 @@
         <div id="scheme-container" class="span12" style="margin-left: 0; padding-left: 0;">
           <h4>Upcoming Schemes</h4>
           <div id="index-schemes">
+            <% Scheme.all.each do |scheme| %>
+               <%= render :partial => "scheme_icon", :locals => {: => message } %>
+            <% end %>
           </div>
         </div>
     </div>
   </div>
-  <div class="modal clearfix" id="team-select">
-  </div>
+</div>
+<div class="modal clearfix" id="team-select">
+</div>
 
 <script type="text/template"  id="search-results-template">
   <h4> Displaying [[= count ]] Results</h4>
