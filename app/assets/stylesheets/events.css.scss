@@ -15,8 +15,7 @@
 	padding: 0px;
 	text-align: center;
 	color: #114455;
-background-color: #f5f5f5;
-	margin-bottom: 20px;
+	background-color: #f5f5f5;
 }
 #bgcarousel {
 	height: 400px;
@@ -176,6 +175,14 @@ background-color: #f5f5f5;
 		display: inline-block;
 	}
 }
+
+#main-container-container {
+    background: #f5f6f8;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+
 html {
 	min-width: 1200px;
 }

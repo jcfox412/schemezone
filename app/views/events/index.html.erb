@@ -1,6 +1,9 @@
 <div id="bgcarousel" class="carousel slide">
   <div class="carousel-inner">
     <div class="active item" style="background-image: url(http://www.calstategames.org/images/Super%20Bowl.jpg)"></div>
+    <div class="item" style="background-image: url(http://upload.wikimedia.org/wikipedia/commons/0/02/2009_MN_Boys_Hockey_State_Championship.jpg)"></div>
+    <div class="item" style="background-image: url(http://worldonline.media.clients.ellingtoncms.com/img/blogs/entry_img/2010/May/25/WNIT_Panorama1.jpg)"></div>
+    <div class="item" style="background-image: url(http://traveljapanblog.com/ashland/wp-content/uploads/2012/06/126_3845-yankee-stadium-panorama.jpg)"></div>
   </div>
   <div class="mask"></div>
 </div>
@@ -26,6 +29,7 @@
           </div>
       </div>
 </section>
+<div id="main-container-container">
   <div class="container" style="margin-left: 5%; margin-right: 5%">
     <div id="main-container">
       <div id="events-container" class="span12">
@@ -33,12 +37,16 @@
         <div id="scheme-container" class="span12" style="margin-left: 0; padding-left: 0;">
           <h4>Upcoming Schemes</h4>
           <div id="index-schemes">
+            <% Scheme.all.each do |scheme| %>
+               <%= render :partial => "shared/scheme_icon", :locals => {:scheme => scheme } %>
+            <% end %>
           </div>
         </div>
     </div>
   </div>
-  <div class="modal clearfix" id="team-select">
-  </div>
+</div>
+<div class="modal clearfix" id="team-select">
+</div>
 
 <script type="text/template"  id="search-results-template">
   <h4> Displaying [[= count ]] Results</h4>
