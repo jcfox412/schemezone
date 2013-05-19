@@ -47,15 +47,41 @@
 	width: 72px;
 }
 
+.event-show-message {
+	font-size: 15px;
+	width: 500px;
+	border: 1px solid #e8e8e8;
+	padding: 10px;
+	border-radius: 3px;
+	box-shadow: -3px 3px 5px rgba(20,20,20,.1);
+	.e-message, .e-timestamp {
+		text-align: left;
+	}
+	.e-center {
+		font-size: 12px;
+		color: #485868;
+	}
+}
+
 .center {
   display: block;
 	margin: 0 auto;
+	text-align: center;
+}
+#fb-btn, #message-submit {
+	display: inline-block;
 }
 
-#message-submit {
+#fb-btn {
+	width: 70px;
+	height: 13px;
+	font-size: 12px;
+}
+
+#message-submit, #fb-btn {
 	margin-top: 5px;
 }
 
-#message-submit:hover{
+#message-submit:hover {
 	width: 52px;
 }
