@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
 
-  before_filter :get_event
+  before_filter :get_event, :require_login
 
   # GET /contests/1
   # GET /contests/1.json
