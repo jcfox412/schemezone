@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 	end
 	helper_method :current_user
 
+  helper :application
+
 	private
   	#makes sure that the user is logged in, else redirects to login page
   	def require_login

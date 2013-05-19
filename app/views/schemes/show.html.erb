@@ -196,8 +196,8 @@ $(document).ready(function(){
         if (!picked){
              var parentOffset = $(this).parent().offset(); 
                //or $(this).offset(); if you really just want the current element's offset
-               posX = e.pageX - parentOffset.left - 24;
-               posY = e.pageY - parentOffset.top - 40;
+               posX = e.pageX - parentOffset.left - 10;
+               posY = e.pageY - parentOffset.top - 20;
              $("#pin").show()
              $("#pin").css("left", posX + "px")
              $("#pin").css("top", posY + "px")
@@ -257,29 +257,7 @@ $(document).ready(function(){
     <% end %>
 })
 </script>
-<% if @current_user && !@scheme.users.include?(@current_user) %>
-  <% if !@already_have_loc %>
-    <a href="#myModal" role="button" class="btn" data-toggle="modal"> Add To Your Watchlist</a>
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        Add To Your Schemes!
-      </div>
-      <div class="modal-body">
-             Pick your location below by clicking on the map. Double click to change:
-            <div "temp-loc" > </div>
-            <div id="map3" style="background-image:url('http://blog.ticketcity.com/wp-content/uploads/2008/09/new-dallas-cowboys-stadium-arlington-seating-chart1.jpg'); background-size: 500px 500px; width: 500px; height: 500px; position:relative">
-                <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
-            </div>
-             <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-    </div>
-  <% else %>
-    <a role="button" id = 'add-to-watch-already-exists-btn' class="btn">Join this Scheme</a>
-  <% end%>
-<% end %>
+
 
 <div class="modal clearfix" id="contest-select">
   </div>
@@ -291,12 +269,45 @@ $(document).ready(function(){
   <% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
     <span id="contest" style="display: inline-block; margin: -20px 0 0 20px;" class="btn">Register Scheme for a Contest</span >
   <% end %>
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              Add To Your Schemes!
+            </div>
+            <div class="modal-body">
+                   Pick your location below by clicking on the map. Double click to change:
+                  <div "temp-loc" > </div>
+                   <div id="map3">
+                      <image id="pin" src="/img/map.png" style="width:12px; height:20px; position:absolute"/>
+                  </div>
+                  <br />
+                   <button type="submit" id="add-scheme-btn" class="btn">Add!</button> 
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+          </div>
+
+
   <hr>
 </div>
 <div id="scheme-main-row-container" class="center">
   <div id="scheme-main-row" class="clearfix center">
     <div id="scheme-image" class="pull-left">
        <%= render :partial => "shared/scheme_icon", :locals => {:scheme => @scheme, :hover=> false } %>
+      
+       <br />
+       <% if @current_user && !@scheme.users.include?(@current_user) %>
+        <% if !@already_have_loc %>
+          <a href="#myModal" role="button" class="btn special-input" data-toggle="modal"> Participate in this Scheme!</a>
+        <% else %>
+          <a role="button" id = 'add-to-watch-already-exists-btn' class="btn">Participate in this Scheme!</a>
+        <% end%>
+      <% end %>
+
+
+
     </div>
     <div id="scheme-users" class="pull-left">
       <div id="scheme-users-title" class="scheme-section-title">
@@ -336,14 +347,10 @@ $(document).ready(function(){
 </div>
 <hr>
 <div style="width: 100%;">
-  <div class="center" >
-    <textarea id ="message-text-box" class="center" resizeable="false"></textarea>
-    <input class="center  special-input" type="submit" id="message-submit" class="btn" />
-    <input class="center special-input" id="fb-btn" type="submis" class="btn"value="Post to FB!"/>
-  </div>
+ 
   <div class="center">
     <h2 id="messages-section-title">Messages</h2>
-    <div id="messages">
+    <div id="messages" style="width:613px; margin:0 auto; margin-bottom:10px; height:200px; overflow:auto; overflow-y:'scroll'">
       <% @scheme.messages.each do |m| %>
       <div class="event-show-message center">
         <div class="e-message"><%= m.content %></div>
@@ -353,6 +360,13 @@ $(document).ready(function(){
       <% end %> 
     </div>
   </div>
+
+   <div class="center" >
+    <textarea id ="message-text-box" class="center" resizeable="false" style="text-align:left"></textarea>
+    <input class="center  special-input" type="submit" id="message-submit" class="btn" />
+    <input class="center special-input" id="fb-btn" type="submis" class="btn"value="Post to FB!"/>
+  </div>
+
 </div>
 
 
