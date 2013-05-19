@@ -279,36 +279,40 @@ $(document).ready(function(){
 
 <div class="modal clearfix" id="contest-select">
   </div>
-<% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
-  <div id="contest" class="btn">Add to Contest</div>
-<% end %>
 
 <p id="notice"><%= notice %></p>
 
-<div id="scheme-title" class="container">
-  <h1><%= @scheme.title %></h1>
+<div id="scheme-title" class="container" style="margin-bottom: 20px; text-align: center;">
+  <hr>
+  <h1 style="display: inline-block;"><%= @scheme.title %></h1>
+  <% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
+    <span id="contest" style="display: inline-block; margin: -20px 0 0 20px;" class="btn">Register Scheme for a Contest</span >
+  <% end %>
+  <hr>
 </div>
-<div id="scheme-main-row-container">
-  <div id="scheme-main-row" class="clearfix">
+<div id="scheme-main-row-container" class="center">
+  <div id="scheme-main-row" class="clearfix center">
     <div id="scheme-image" class="pull-left">
        <%= render :partial => "shared/scheme_icon", :locals => {:scheme => @scheme, :hover=> false } %>
     </div>
     <div id="scheme-users" class="pull-left">
-      <% if @scheme.users.count >0 %>
-        <% @scheme.users do |user| %>
-          <div class="scheme-user">
-            <%= user.name %>
-          </div>
-        <% end %>
-      <% else %>
-        There is nobody registered to this scheme. Be the first!
+      <div id="scheme-users-title" class="scheme-section-title">
+        <h3 style="margin-top: -10px">Users Scheming</h3>
+      </div>
+      <ul>
+          <li><%= @scheme.creator.name %></li>
+      <% @scheme.users do |user| %>
+          <li><%= user.name %></li>
       <% end %>
+      </ul>
     </div>
     <div id="scheme-contests" class="pull-left">
+      <div id="scheme-users-title" class="scheme-section-title">
+        <h3 style="margin-top: -10px">Registered Contests</h3>
+      </div>
       <% if @scheme.contests.count > 0 %>
         <% @scheme.contests do |content| %>
           <div class="scheme-contest">
-
           </div>
         <% end %>
       <% else %>
@@ -319,19 +323,26 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-<textarea id ="message" rows="10" cols="400"></textarea>
-<button type="submit" id="message-submit" class="btn"> Submit!</button>
-
+<div style="height: 20px"></div>
+<div class="center">
+  <input style="display: block" id="video-chat" class="video-button special-input center" type="submit" value="Video Chat">
+  <div style="width:900px;height:300px; display: none;" id="video-views">
+    <div id="myCamera" class="publisherContainer" style="float:left;"></div>
+    <div id="subscribers" style=" margin-left:40px;float:left"></div>
+  </div>
+</div>
+<hr>
+<div style="width: 100%;">
+  <div class="center" >
+    <textarea id ="message-text-box" class="center" resizeable="false"></textarea>
+    <input   class="center  special-input" type="submit" id="message-submit" class="btn" />
+  </div>
+</div>
 
   <div id="links">
         <!-- <input type="button" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" />
         <input type="button" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" />
         <input type="button" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" /> -->
-  </div>
-
-  <div style="width:900px;height:300px;">
-    <div id="myCamera" class="publisherContainer" style="float:left;"></div>
-    <div id="subscribers" style=" margin-left:40px;float:left"></div>
   </div>
 <!-- <div id="myPublisherDiv"></div> -->
 <script>
