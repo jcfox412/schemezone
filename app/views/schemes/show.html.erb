@@ -282,7 +282,6 @@ $(document).ready(function(){
 <p id="notice"><%= notice %></p>
 
 <div id="scheme-title" class="container" style="margin-bottom: 20px; text-align: center;">
-  <hr>
   <h1 style="display: inline-block;"><%= @scheme.title %></h1>
   <% if @current_user && @scheme.creator_id == @current_user.id.to_s %>
     <span id="contest" style="display: inline-block; margin: -20px 0 0 20px;" class="btn">Register Scheme for a Contest</span >
@@ -315,9 +314,7 @@ $(document).ready(function(){
           </div>
         <% end %>
       <% else %>
-        This scheme is currently not entered in any contests. <br />
-        Use the message box below to ask the scheme creator to enter it
-        in a contest!
+        This scheme is currently not entered in any contests but you can use the message box below to talk to fellow schemers including the scheme creator to. Try convincing him to enter a contest!
       <% end %>
     </div>
   </div>

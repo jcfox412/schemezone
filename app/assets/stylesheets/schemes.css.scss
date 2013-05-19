@@ -16,11 +16,20 @@
 }
 
 
+.bordered-wrapper {
+	padding: 3px;
+	border: 1px solid #444;
+	background-color: #e8e8e8;
+}
+
 #scheme-users, #scheme-contests {
 	width: 400px;
 	height: 200px;
+	background-color: #fff;
 	margin: 5px;
 	overflow: auto;
+	font-size: 15px;
+	line-height: 15px;
 }
 
 #message-text-box {
