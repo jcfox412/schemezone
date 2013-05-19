@@ -158,7 +158,7 @@ $(document).ready(function(){
                   <h3><%= s.title %>    </h3>
                   <p><%= s.description %></p>
                 </div>
-                <div id="endorsed-wrapper">
+                <div id="endorsed-wrapper-<%= s.id %>">
                      <% @current_user.team_admins.each do |a| %>
                       <% if (a.team_name == s.team_name) && !(s.is_endorsed) %>
                           <div class="btn scheme-endorse" id="endorse-<%= s.id %>">Endorse!</div>    
@@ -179,7 +179,7 @@ $(document).ready(function(){
 <script>
   $(".scheme-endorse").click(function(e) {
     e.preventDefault();
-    scheme_id = this.id.split("-")[1];
+    var scheme_id = this.id.split("-")[1];
     $.ajax({
       url: "/events/<%= @event.id %>/schemes/" + scheme_id,
       type: "PUT",
@@ -189,7 +189,7 @@ $(document).ready(function(){
         }
       },
         success: function() {
-          location.reload();
+          $("#endorsed-wrapper-" + scheme_id).html('<div id="is_endorsed">Endorsed!</div>');
         }
     })
   })
